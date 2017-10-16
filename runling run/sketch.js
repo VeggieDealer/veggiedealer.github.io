@@ -1,7 +1,7 @@
 let runlingDestination;
 let runling = {
   position: 0,
-  speed: 2
+  speed: 0.4
 }
 let runlingMove = false;
 let moveVector = false;
@@ -14,9 +14,6 @@ let baseDrone = {
   yMove: 2
 }
 let lane = 0;
-let rise;
-let run;
-let slope;
 let speedComplete = false;
 let godMode = -1
 // SETUP FUNCTION - Runs once at beginning of program
@@ -25,6 +22,9 @@ function setup() {
   runling.position = createVector(10, 10);
   runlingDestination = createVector(0, 0);
   droneNumber = 0;
+
+  //Calling localStorage
+  runling.speed = parseFloat(localStorage.getItem("speed"));
 }
 
 // DRAW FUNCTION - Loops @ 60FPS by default
@@ -35,13 +35,12 @@ function draw() {
   fill("white");
   rect(0, 0, 100, 100);
   rect(1377, 0, 122, 96);
-
+  rect(1377, 1200, 120, 99);
   drawMap();
   drawCharacter();
   boundaries();
 
   stroke(0);
-
 
 
   //angled movement?
@@ -50,31 +49,37 @@ function draw() {
   slope = rise / run;
 
   // Assigning the drones random spots within the lane and giving them random speeds
-  if (droneNumber < 15) {
+  if (droneNumber < 10) {
     drones.push(Object.assign({}, baseDrone));
     drones[drones.length - 1].x = random(100, 1350);
     drones[drones.length - 1].y = random(10, 95);
-    drones[drones.length - 1].xMove = random(-2, 2);
+    drones[drones.length - 1].xMove = random(-1, 1);
 
 
-    while (drones[drones.length - 1].xMove < 0.2 && drones[drones.length - 1].xMove > -0.2) {
-      drones[drones.length - 1].xMove = random(-2, 2);
+    while (drones[drones.length - 1].xMove < 0.4 && drones[drones.length - 1].xMove > -0.4) {
+      drones[drones.length - 1].xMove = random(-1, 1);
     }
-    drones[drones.length - 1].yMove = random(-2, 2);
-    while (drones[drones.length - 1].yMove < 0.1 && drones[drones.length - 1].yMove > -0.1) {
-      drones[drones.length - 1].yMove = random(-2, 2);
+    drones[drones.length - 1].yMove = random(-1, 1);
+    while (drones[drones.length - 1].yMove < 0.4 && drones[drones.length - 1].yMove > -0.4) {
+      drones[drones.length - 1].yMove = random(-1, 1);
     }
 
     droneNumber++;
 
     //Drawing Drones in lane 2
   }
-  if (droneNumber < 15) {
+  if (droneNumber < 10) {
     drones.push(Object.assign({}, baseDrone));
     drones[drones.length - 1].x = random(1380, 1490);
     drones[drones.length - 1].y = random(107, 1100);
     drones[drones.length - 1].xMove = random(-1, 1);
+    while (drones[drones.length - 1].xMove < 0.4 && drones[drones.length - 1].xMove > -0.4) {
+      drones[drones.length - 1].xMove = random(-1, 1);
+    }
     drones[drones.length - 1].yMove = random(-1, 1);
+    while (drones[drones.length - 1].yMove < 0.4 && drones[drones.length - 1].yMove > -0.4) {
+      drones[drones.length - 1].yMove = random(-1, 1);
+    }
   }
 
 
@@ -84,13 +89,12 @@ function draw() {
     ellipse(drones[i].x, drones[i].y, drones[i].r);
     drones[i].x += drones[i].xMove;
     drones[i].y += drones[i].yMove;
+    //lane one drones
     if (drones[i].x < 107 && drones[i].x > 100 && drones[i].y > 10 && drones[i].y < 97) {
       drones[i].xMove *= -1;
     } else if (drones[i].x > 1370 && drones[i].x < 1375 && drones[i].y > 10 && drones[i].y < 97) {
       drones[i].xMove *= -1;
     }
-
-
     if (drones[i].y < 10) {
       drones[i].yMove *= -1;
     } else if (drones[i].y > 97 && drones[i].y < 100 && drones[i].x > 107) {
@@ -99,14 +103,16 @@ function draw() {
       drones[i].yMove *= -1;
     }
 
+
+    //lane two Drones
     if (drones[i].x < 1380 && drones[i].x > 1375 && drones[i].y > 100) {
       drones[i].xMove *= -1;
     } else if (drones[i].x > width && drones[i].y > 100) {
       drones[i].xMove *= -1;
     }
-    if (drones[i].y < 100 && drones[i].x < width && drones[i].x > 1380) {
+    if (drones[i].y < 105 && drones[i].x < width && drones[i].x > 1380) {
       drones[i].yMove *= -1;
-    } else if (drones[i].y > 1200 && drones[i].x < width && drones[i].x > 1380) {
+    } else if (drones[i].y > 1192 && drones[i].x < width && drones[i].x > 1380) {
       drones[i].yMove *= -1;
     }
 
@@ -128,6 +134,15 @@ function draw() {
       runling.position.add(moveVector);
     }
   }
+
+
+
+
+
+
+  //LOCAL STORAGE
+  localStorage.setItem('speed', runling.speed);
+
 }
 
 function mousePressed() {
@@ -142,9 +157,9 @@ function keyPressed() {
     runlingMove = false;
   }
   if (keyCode == UP_ARROW) {
-    runling.speed += 0.5;
+    runling.speed += 0.2;
   } else if (keyCode == DOWN_ARROW) {
-    runling.speed -= 0.5;
+    runling.speed -= 0.2;
   }
   if (keyCode == 71) {
     godMode *= -1

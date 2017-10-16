@@ -33,6 +33,15 @@ function drawCharacter() {
   fill("blue");
   ellipse(runling.position.x, runling.position.y, 4);
 
+  if (runling.speed < 0.8 && lane == 2) {
+    runling.speed += 0.2;
+  } else if (runling.speed < 1 && lane == 3) {
+    runling.speed += 0.2;
+  } else if (runling.speed < 1.2 && lane == 4) {
+    runling.speed += 0.2;
+  } else if (runling.speed < 1.4 && lane == 5) {
+    runling.speed += 0.2;
+  }
 }
 
 function boundaries() {
@@ -56,9 +65,19 @@ function boundaries() {
   if (runling.position.y <= 5) {
     runling.position.y = 5;
   }
+  if (runling.position.y >= height) {
+    runling.position.y = height - 5;
+  }
+  if (runling.position.x >= width) {
+    runling.position.x = width -5;
+  }
   if (runling.position.y > 93 && lane == 1) {
     runling.position.y = 90;
-  } else if (runling.position.x > 1370 && runling.position.x < 1380 && runling.position.y > 107 && runling.position.y < 1200 && lane == 2) {
-    runling.position.x = 1381;
+  } else if (runling.position.x < 1384 && runling.position.y > 107 && runling.position.y < 1200 && lane == 2) {
+    runling.position.x = 1385;
+  } else if (runling.position.x < 1387 && runling.position.y < 1205 && runling.position.x > 100 && lane == 3) {
+    runling.position.y = 1206;
+  } else if (runling.position.x > 95 && runling.position.y > 107 && runling.position.y < 1200 && lane == 4) {
+    runling.position.x = 94;
   }
 }

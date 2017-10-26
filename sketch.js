@@ -1,7 +1,7 @@
 let runlingDestination;
 let runling = {
   position: 0,
-  speed: 0.4
+  speed: 0.7
 }
 let runlingMove = false;
 let moveVector = false;
@@ -26,8 +26,10 @@ function setup() {
   baseDrone.move = p5.Vector.random2D(-1,1);
   baseDrone.position = createVector(0,0);
   //Calling localStorage
-    if (localStorage.getItem("speed") !== NaN) {
+    if (parseFloat(localStorage.getItem("speed")) !== NaN) {
         runling.speed = parseFloat(localStorage.getItem("speed"));
+    } else {
+        runling.speed = 0.7;
     }
     
 }

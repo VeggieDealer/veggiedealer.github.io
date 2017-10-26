@@ -26,10 +26,10 @@ function setup() {
   baseDrone.move = p5.Vector.random2D(-1,1);
   baseDrone.position = createVector(0,0);
   //Calling localStorage
-    if (parseFloat(localStorage.getItem("speed")) !== NaN) {
-        runling.speed = parseFloat(localStorage.getItem("speed"));
-    } else {
+    if (parseFloat(localStorage.getItem("speed")) == NaN) {
         runling.speed = 0.7;
+    } else {
+        runling.speed = parseFloat(localStorage.getItem("speed"));
     }
     
 }

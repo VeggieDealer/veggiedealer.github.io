@@ -7,22 +7,24 @@ let runlingMove = false;
 let moveVector = false;
 drones = [];
 let baseDrone = {
-  x: 0,
-  y: 0,
+  position: 0,
   r: 15,
-  xMove: 2,
-  yMove: 2
+  move: 0,
 }
 let lane = 0;
 let speedComplete = false;
-let godMode = -1
+let godMode = -1;
+
+
+
 // SETUP FUNCTION - Runs once at beginning of program
 function setup() {
   createCanvas(1500, 1300);
   runling.position = createVector(10, 10);
   runlingDestination = createVector(0, 0);
   droneNumber = 0;
-
+  baseDrone.move = p5.Vector.random2D(-1,1);
+  baseDrone.position = createVector(0,0);
   //Calling localStorage
   runling.speed = parseFloat(localStorage.getItem("speed"));
 }
@@ -31,11 +33,16 @@ function setup() {
 function draw() {
   background(200, 200, 200);
   fill(200, 200, 200);
-  //safe zones
+
   fill("white");
+  //safe zone 1
   rect(0, 0, 100, 100);
+  //safe zone 2
   rect(1377, 0, 122, 96);
+  //safe zone 3
   rect(1377, 1200, 120, 99);
+  //safe zone 4
+  rect(0, 1200, 100, 99);
   drawMap();
   drawCharacter();
   boundaries();
@@ -43,82 +50,94 @@ function draw() {
   stroke(0);
 
 
-  //angled movement?
-  rise = runlingDestination.y - runling.position.y;
-  run = runlingDestination.x - runling.position.x;
-  slope = rise / run;
-
   // Assigning the drones random spots within the lane and giving them random speeds
-  if (droneNumber < 10) {
+  //lane 1 drone draw
+  if (droneNumber < 11) {
     drones.push(Object.assign({}, baseDrone));
-    drones[drones.length - 1].x = random(100, 1350);
-    drones[drones.length - 1].y = random(10, 95);
-    drones[drones.length - 1].xMove = random(-1, 1);
+    drones[drones.length - 1].position = createVector();
+    drones[drones.length - 1].position.x = random(100, 1300);
+    drones[drones.length - 1].position.y = random(10, 95);
+    drones[drones.length - 1].move = p5.Vector.random2D();
+    drones[drones.length - 1].move.setMag(1.5);
 
-
-    while (drones[drones.length - 1].xMove < 0.4 && drones[drones.length - 1].xMove > -0.4) {
-      drones[drones.length - 1].xMove = random(-1, 1);
-    }
-    drones[drones.length - 1].yMove = random(-1, 1);
-    while (drones[drones.length - 1].yMove < 0.4 && drones[drones.length - 1].yMove > -0.4) {
-      drones[drones.length - 1].yMove = random(-1, 1);
-    }
 
     droneNumber++;
 
     //Drawing Drones in lane 2
   }
-  if (droneNumber < 10) {
+
+
+
+  if (droneNumber < 11) {
     drones.push(Object.assign({}, baseDrone));
-    drones[drones.length - 1].x = random(1380, 1490);
-    drones[drones.length - 1].y = random(107, 1100);
-    drones[drones.length - 1].xMove = random(-1, 1);
-    while (drones[drones.length - 1].xMove < 0.4 && drones[drones.length - 1].xMove > -0.4) {
-      drones[drones.length - 1].xMove = random(-1, 1);
-    }
-    drones[drones.length - 1].yMove = random(-1, 1);
-    while (drones[drones.length - 1].yMove < 0.4 && drones[drones.length - 1].yMove > -0.4) {
-      drones[drones.length - 1].yMove = random(-1, 1);
-    }
+    drones[drones.length - 1].position = createVector();
+    drones[drones.length - 1].position.x = random(1380, 1490);
+    drones[drones.length - 1].position.y = random(110, 1100);
+    drones[drones.length - 1].move = p5.Vector.random2D();
+    drones[drones.length - 1].move.setMag(1.5);
+
+
+  }
+  //Drawing drones in lane 3
+  if (droneNumber < 11) {
+    drones.push(Object.assign({}, baseDrone));
+    drones[drones.length - 1].position = createVector();
+    drones[drones.length - 1].position.x = random(160, 1300);
+    drones[drones.length - 1].position.y = random(1220, height - 11);
+    drones[drones.length - 1].move = p5.Vector.random2D();
+    drones[drones.length - 1].move.setMag(1.5);
   }
 
+  //
 
   // Creating the drones
   for (i = 0; i < drones.length; i++) {
     fill("black");
-    ellipse(drones[i].x, drones[i].y, drones[i].r);
-    drones[i].x += drones[i].xMove;
-    drones[i].y += drones[i].yMove;
-    //lane one drones
-    if (drones[i].x < 107 && drones[i].x > 100 && drones[i].y > 10 && drones[i].y < 97) {
-      drones[i].xMove *= -1;
-    } else if (drones[i].x > 1370 && drones[i].x < 1375 && drones[i].y > 10 && drones[i].y < 97) {
-      drones[i].xMove *= -1;
+    ellipse(drones[i].position.x, drones[i].position.y, drones[i].r);
+    drones[i].position.add(drones[i].move);
+    //lane one drones rebounce
+    if (drones[i].position.x < 107 && drones[i].position.x > 100 && drones[i].position.y > 10 && drones[i].position.y < 97) {
+      drones[i].move.x *= -1;
+    } else if (drones[i].position.x > 1370 && drones[i].position.x < 1375 && drones[i].position.y > 10 && drones[i].position.y < 97) {
+      drones[i].move.x *= -1;
     }
-    if (drones[i].y < 10) {
-      drones[i].yMove *= -1;
-    } else if (drones[i].y > 97 && drones[i].y < 100 && drones[i].x > 107) {
-      drones[i].yMove *= -1;
-    } else if (drones[i].y > 97 && drones[i].y < 100 && drones[i].x < 1370) {
-      drones[i].yMove *= -1;
+    if (drones[i].position.y < 10) {
+      drones[i].move.y *= -1;
+    } else if (drones[i].position.y > 97 && drones[i].position.y < 100 && drones[i].position.x > 107) {
+      drones[i].move.y *= -1;
+    } else if (drones[i].position.y > 97 && drones[i].position.y < 100 && drones[i].position.x < 1370) {
+      drones[i].move.y *= -1;
     }
 
 
-    //lane two Drones
-    if (drones[i].x < 1380 && drones[i].x > 1375 && drones[i].y > 100) {
-      drones[i].xMove *= -1;
-    } else if (drones[i].x > width && drones[i].y > 100) {
-      drones[i].xMove *= -1;
+    //lane two Drones rebounce
+    if (drones[i].position.x < 1380 && drones[i].position.x > 1375 && drones[i].position.y > 100) {
+      drones[i].move.x *= -1;
+    } else if (drones[i].position.x > width && drones[i].position.y > 100) {
+      drones[i].move.x *= -1;
     }
-    if (drones[i].y < 105 && drones[i].x < width && drones[i].x > 1380) {
-      drones[i].yMove *= -1;
-    } else if (drones[i].y > 1192 && drones[i].x < width && drones[i].x > 1380) {
-      drones[i].yMove *= -1;
+    if (drones[i].position.y < 105 && drones[i].position.x < width && drones[i].position.x > 1380) {
+      drones[i].move.y *= -1;
+    } else if (drones[i].position.y > 1192 && drones[i].position.x < width && drones[i].position.x > 1380) {
+      drones[i].move.y *= -1;
+    }
+
+    //lane three Drones rebounce
+
+    if (drones[i].position.x < 110 && drones[i].position.y > 1200) {
+      drones[i].move.x *= -1;
+    } else if (drones[i].position.x > 1370 && drones[i].position.y > 1200) {
+      drones[i].move.x *= -1;
+    }
+    if (drones[i].position.y < 1212 && drones[i].position.y > 1210 && drones[i].position.x > 100 && drones[i].position.x < 1380) {
+      drones[i].move.y *= -1;
+    } else if (drones[i].position.y > height) {
+      drones[i].move.y *= -1;
     }
 
 
     //Drone Collision
-    if (dist(runling.position.x, runling.position.y, drones[i].x, drones[i].y) < drones[i].r - 3 && godMode == -1) {
+    if (dist(runling.position.x, runling.position.y, drones[i].position.x, drones[i].position.y) < drones[i].r - 3 && godMode == -1) {
       runling.position.x = 10;
       runling.position.y = 10;
       runlingMove = false;
@@ -134,11 +153,6 @@ function draw() {
       runling.position.add(moveVector);
     }
   }
-
-
-
-
-
 
   //LOCAL STORAGE
   localStorage.setItem('speed', runling.speed);

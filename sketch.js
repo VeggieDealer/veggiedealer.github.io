@@ -26,7 +26,10 @@ function setup() {
   baseDrone.move = p5.Vector.random2D(-1,1);
   baseDrone.position = createVector(0,0);
   //Calling localStorage
-  runling.speed = parseFloat(localStorage.getItem("speed"));
+    if (localStorage.getItem("speed") !== NaN) {
+        runling.speed = parseFloat(localStorage.getItem("speed"));
+    }
+    
 }
 
 // DRAW FUNCTION - Loops @ 60FPS by default

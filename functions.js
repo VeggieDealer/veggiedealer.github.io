@@ -71,10 +71,14 @@ function boundaries() {
     lane = 4;
   } else if (runling.position.x > 0 && runling.position.x < 1245 && runling.position.y > 110 && runling.position.y < 200) {
     lane = 5;
-  } else if (runling.position.x > 1250 && runling.position.x < 1375 && runling.position.y > 110 && runling.position.y < 1190) {
+  } else if (runling.position.x > 1250 && runling.position.x < 1375 && runling.position.y > 110 && runling.position.y < 1100) {
     lane = 6;
   } else if (runling.position.x > 100 && runling.position.x < 1375 && runling.position.y < 1190 && runling.position.y > 1105) {
     lane = 7;
+  } else if (runling.position.x > 100 && runling.position.x < 200 && runling.position.y > 110 && runling.position.y < 1100) {
+    lane = 8;
+  } else if (runling.position.x > 100 && runling.position.x < 1240 && runling.position.y > 200 && runling.position.y < 300) {
+    lane = 9;
   }
 
   if (lane == 1) {
@@ -98,20 +102,6 @@ function boundaries() {
   } else if (lane == 7) {
     runling.position.x = constrain(runling.position.x, 100, 1365);
     runling.position.y = constrain(runling.position.y, 1110, 1190);
-  }
-
-
-
-  //boundaries
-
-  /*
-   if (runling.position.x < 1387 && runling.position.y < 1205 && runling.position.x > 100 && lane == 3) {
-      runling.position.y = 1206;
-    } else if (runling.position.x > 95 && runling.position.y > 107 && runling.position.y < 1200 && lane == 4) {
-      runling.position.x = 90;
-    } else if (runling.position.x > 100 && runling.position.y < 110 && runling.position.y > 100 && runling.position.x < 1380 && lane == 5) {
-      runling.position.y = 110;
-    }
-    */
-
+  } 
+    
 }

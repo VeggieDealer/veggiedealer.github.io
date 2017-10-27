@@ -35,7 +35,8 @@ function draw() {
   background(200, 200, 200);
   fill(200, 200, 200);
 
-  if (runling.speed == NaN) {
+  if (isNaN(runling.speed)) {
+      console.log("NONONONONONO");
       runling.speed = 0.7;
   }
   fill("white");

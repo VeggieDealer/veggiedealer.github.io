@@ -92,6 +92,18 @@ function draw() {
     drones[drones.length - 1].move = p5.Vector.random2D();
     drones[drones.length - 1].move.setMag(1.5);
   }
+    
+  //Drawing drones in lane 4
+    if (droneNumber < 11) {
+        drones.push(Object.assign({}, baseDrone));
+        drones[drones.length - 1].position = createVector();
+        drones[drones.length - 1].position.x = random(10, 90);
+        drones[drones.length - 1].position.y = random(250, 1150);
+        drones[drones.length - 1].move = p5.Vector.random2D();
+        drones[drones.length - 1].move.setMag(1.5);
+    }
+    
+    //
 
   //
 

@@ -73,9 +73,9 @@ function boundaries() {
     lane = 5;
   } else if (runling.position.x > 1250 && runling.position.x < 1375 && runling.position.y > 110 && runling.position.y < 1100) {
     lane = 6;
-  } else if (runling.position.x > 100 && runling.position.x < 1375 && runling.position.y < 1190 && runling.position.y > 1105) {
+  } else if (runling.position.x > 200 && runling.position.x < 1375 && runling.position.y < 1190 && runling.position.y > 1105) {
     lane = 7;
-  } else if (runling.position.x > 100 && runling.position.x < 200 && runling.position.y > 110 && runling.position.y < 1100) {
+  } else if (runling.position.x > 100 && runling.position.x < 210 && runling.position.y > 310 && runling.position.y < 1190) {
     lane = 8;
   } else if (runling.position.x > 100 && runling.position.x < 1240 && runling.position.y > 200 && runling.position.y < 300) {
     lane = 9;
@@ -100,8 +100,14 @@ function boundaries() {
     runling.position.x = constrain(runling.position.x, 1260, 1365);
     runling.position.y = constrain(runling.position.y, 110, 1190);
   } else if (lane == 7) {
-    runling.position.x = constrain(runling.position.x, 100, 1365);
+    runling.position.x = constrain(runling.position.x, 110, 1365);
     runling.position.y = constrain(runling.position.y, 1110, 1190);
-  } 
+  } else if (lane == 8) {
+    runling.position.x = constrain(runling.position.x, 110, 190);
+    runling.position.y = constrain(runling.position.y, 210, 1190);
+  } else if (lane == 9) {
+    runling.position.x = constrain(runling.position.x, 110, 1250);
+    runling.position.y = constrain(runling.position.y, 210, 290);
+  }
     
 }

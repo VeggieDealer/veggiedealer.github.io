@@ -97,7 +97,7 @@ function boundaries() {
     runling.position.x = constrain(runling.position.x, 3, 1365);
     runling.position.y = constrain(runling.position.y, 110, 193);
   } else if (lane == 6) {
-    runling.position.x = constrain(runling.position.x, 1260, 1365);
+    runling.position.x = constrain(runling.position.x, 1258, 1365);
     runling.position.y = constrain(runling.position.y, 110, 1190);
   } else if (lane == 7) {
     runling.position.x = constrain(runling.position.x, 110, 1365);
@@ -106,7 +106,7 @@ function boundaries() {
     runling.position.x = constrain(runling.position.x, 110, 190);
     runling.position.y = constrain(runling.position.y, 210, 1190);
   } else if (lane == 9) {
-    runling.position.x = constrain(runling.position.x, 110, 1250);
+    runling.position.x = constrain(runling.position.x, 110, 1240);
     runling.position.y = constrain(runling.position.y, 210, 290);
   }
     

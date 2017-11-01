@@ -21,10 +21,7 @@ function drawMap() {
     line(950, 475, 950, 850);
     line(950, 850, 500, 850);
     line(500, 850, 500, 550);
-    line(500, 550, 850, 550);
-    line(850, 550, 850, 775);
-    line(850, 775, 600, 775);
-    line(600, 775, 600, 650)
+
 }
 
 function drawCharacter() {
@@ -35,37 +32,46 @@ function drawCharacter() {
 
     // runling speeds
 
-
-
-    if (runling.speed < 0.8 && lane == 2) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 1 && lane == 3) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 1.2 && lane == 4) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 1.4 && lane == 5) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 1.6 && lane == 6) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 1.8 && lane == 7) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 2 && lane == 8) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 2.2 && lane == 9) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 2.4 && lane == 10) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 2.6 && lane == 11) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 2.8 && lane == 12) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 3 && lane == 13) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 3.2 && lane == 14) {
-        runling.speed += 0.2;
-    } else if (runling.speed < 3.4 && lane == 15) {
-        runling.speed += 0.2;
+    for (let i = 0; i < 20; i ++) {
+        runSpeed.push(i, i * 0.2 + 0.6); 
+        if (runling.speed < runSpeed[i] && lane == i) {
+            runling.speed += 0.2;
+        }
     }
+    
+    
+
+//    if (runling.speed < 0.8 && lane == 2) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 1 && lane == 3) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 1.2 && lane == 4) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 1.4 && lane == 5) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 1.6 && lane == 6) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 1.8 && lane == 7) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 2 && lane == 8) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 2.2 && lane == 9) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 2.4 && lane == 10) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 2.6 && lane == 11) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 2.8 && lane == 12) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 3 && lane == 13) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 3.2 && lane == 14) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 3.4 && lane == 15) {
+//        runling.speed += 0.2;
+//    } else if (runling.speed < 3.6 && lane == 16) {
+//        runling.speed += 0.2;
+//    }
 }
 
 function boundaries() {
@@ -105,8 +111,17 @@ function boundaries() {
         lane = 16;
     } else if (runling.position.x > 300 && runling.position.x < 1045 && runling.position.y > 305 && runling.position.y < 375) {
         lane = 17;       
-    } else if (runling.position.x > 1050 && runling.position.x < 1145 && runling.position.y > 405 && runling.position.y < 1025) {
+    } else if (runling.position.x > 1050 && runling.position.x < 1145 && runling.position.y > 380 && runling.position.y < 945) {
         lane = 18;
+    } else if (runling.position.x > 305 && runling.position.x < 1145 && runling.position.y > 850 && runling.position.y < 945) {
+        lane = 19;
+    } else if (runling.position.x > 400 && runling.position.x < 495 && runling.position.y > 580 && runling.position.y < 945) {
+        lane = 20;
+    } else {
+        lane = 1;
+        if (level == 1) {
+            level ++;
+        }
     }
                
                
@@ -148,6 +163,9 @@ function boundaries() {
         runling.position.x = constrain(runling.position.x, 207, 290);
         runling.position.y = constrain(runling.position.y, 310, 1095);
     } else if (lane == 13) {
+        runling.position.x = constrain(runling.position.x, 210, 1137);
+        runling.position.y = constrain(runling.position.y, 310, 365);
+    } else if (lane == 14) {
         runling.position.x = constrain(runling.position.x, 210, 1137);
         runling.position.y = constrain(runling.position.y, 310, 365);
     }

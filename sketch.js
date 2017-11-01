@@ -14,7 +14,8 @@ let baseDrone = {
 let lane = 0;
 let speedComplete = false;
 let godMode = -1;
-
+let level = 1;
+let runSpeed = [0.6];
 
 
 // SETUP FUNCTION - Runs once at beginning of program
@@ -187,11 +188,7 @@ function keyPressed() {
     if (keyCode == 83) {
         runlingMove = false;
     }
-    if (keyCode == UP_ARROW) {
-        runling.speed += 0.2;
-    } else if (keyCode == DOWN_ARROW) {
-        runling.speed -= 0.2;
-    }
+
     if (keyCode == 71) {
         godMode *= -1
     }

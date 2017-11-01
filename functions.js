@@ -105,7 +105,9 @@ function boundaries() {
         lane = 16;
     } else if (runling.position.x > 300 && runling.position.x < 1045 && runling.position.y > 305 && runling.position.y < 375) {
         lane = 17;       
-    } else if (runling.position.x > 1050 && runling.position.x < 1145 && runling.position.y >  && runling.position.y < 1025)
+    } else if (runling.position.x > 1050 && runling.position.x < 1145 && runling.position.y > 405 && runling.position.y < 1025) {
+        lane = 18;
+    }
                
                
                

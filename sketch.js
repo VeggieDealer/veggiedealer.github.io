@@ -15,7 +15,7 @@ let lane = 0;
 let speedComplete = false;
 let godMode = -1;
 let level = 1;
-let runSpeed = [0.6];
+let runSpeed = [0, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2, 4.4];
 
 
 // SETUP FUNCTION - Runs once at beginning of program
@@ -64,7 +64,7 @@ function draw() {
         drones[drones.length - 1].position.x = random(100, 1300);
         drones[drones.length - 1].position.y = random(10, 88);
         drones[drones.length - 1].move = p5.Vector.random2D();
-        drones[drones.length - 1].move.setMag(1.5);
+        drones[drones.length - 1].move.setMag(1);
 
 
         droneNumber++;

@@ -33,7 +33,6 @@ function drawCharacter() {
     // runling speeds
 
     for (let i = 0; i < 20; i ++) {
-        runSpeed.push(i, i * 0.2 + 0.6); 
         if (runling.speed < runSpeed[i] && lane == i) {
             runling.speed += 0.2;
         }
@@ -103,9 +102,9 @@ function boundaries() {
         lane = 12;
     } else if (runling.position.x > 210 && runling.position.x < 1150 && runling.position.y > 300 && runling.position.y < 390) {
         lane = 13;
-    } else if (runling.position.x > 1050 && runling.position.x < 1150 && runling.position.y > 305 && runling.position.y < 1025) {
+    } else if (runling.position.x > 1050 && runling.position.x < 1150 && runling.position.y > 305 && runling.position.y < 1020) {
         lane = 14;
-    } else if (runling.position.x > 300 && runling.position.x < 1145 && runling.position.y > 950 && runling.position.y < 1025) {
+    } else if (runling.position.x > 300 && runling.position.x < 1145 && runling.position.y > 950 && runling.position.y < 1020) {
         lane = 15;
     } else if (runling.position.x > 300 && runling.position.x < 395 && runling.position.y > 380 && runling.position.y < 1020) {
         lane = 16;
@@ -168,6 +167,24 @@ function boundaries() {
     } else if (lane == 14) {
         runling.position.x = constrain(runling.position.x, 210, 1137);
         runling.position.y = constrain(runling.position.y, 310, 365);
+    } else if (lane == 15) {
+        runling.position.x = constrain(runling.position.x, 1050, 1145);
+        runling.position.y = constrain(runling.position.y, 305, 1020);
+    } else if (lane == 16) {
+        runling.position.x = constrain(runling.position.x, 300, 395);
+        runling.position.y = constrain(runling.position.y, 380, 1020);
+    } else if (lane == 17) {
+        runling.position.x = constrain(runling.position.x, 300, 1045);
+        runling.position.y = constrain(runling.position.y, 305, 375);
+    } else if (lane == 18) {
+        runling.position.x = constrain(runling.position.x, 1050, 1145);
+        runling.position.y = constrain(runling.position.y, 380, 945);
+    } else if (lane == 19) {
+        runling.position.x = constrain(runling.position.x, 305, 1145);
+        runling.position.y = constrain(runling.position.y, 850, 945);
+    } else if (lane == 20) {
+        runling.position.x = constrain(runling.position.x, 400, 495);
+        runling.position.y = constrain(runling.position.y, 580, 945);
     }
 
 }

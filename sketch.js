@@ -37,7 +37,7 @@ function draw() {
     fill(200, 200, 200);
 
     if (isNaN(runling.speed)) {
-        console.log("NONONONONONO");
+        console.log("fixing...");
         runling.speed = 0.7;
     }
     fill("white");
@@ -57,57 +57,22 @@ function draw() {
 
 
     // Assigning the drones random spots within the lane and giving them random speeds
-    //lane 1 drone draw
-    if (droneNumber < 11) {
-        drones.push(Object.assign({}, baseDrone));
-        drones[drones.length - 1].position = createVector();
-        drones[drones.length - 1].position.x = random(100, 1300);
-        drones[drones.length - 1].position.y = random(10, 88);
-        drones[drones.length - 1].move = p5.Vector.random2D();
-        drones[drones.length - 1].move.setMag(1);
+    //lane 1 drone 
+    sketchDrone(110, 1300, 10, 88, 1);
 
 
-        droneNumber++;
-
-        //Drawing Drones in lane 2
-    }
-
-
-
-    if (droneNumber < 11) {
-        drones.push(Object.assign({}, baseDrone));
-        drones[drones.length - 1].position = createVector();
-        drones[drones.length - 1].position.x = random(1380, 1490);
-        drones[drones.length - 1].position.y = random(110, 1100);
-        drones[drones.length - 1].move = p5.Vector.random2D();
-        drones[drones.length - 1].move.setMag(1.5);
-
-
-    }
-    //Drawing drones in lane 3
-    if (droneNumber < 11) {
-        drones.push(Object.assign({}, baseDrone));
-        drones[drones.length - 1].position = createVector();
-        drones[drones.length - 1].position.x = random(160, 1300);
-        drones[drones.length - 1].position.y = random(1220, height - 11);
-        drones[drones.length - 1].move = p5.Vector.random2D();
-        drones[drones.length - 1].move.setMag(1.5);
-    }
-
-    //Drawing drones in lane 4
-    if (droneNumber < 11) {
-        drones.push(Object.assign({}, baseDrone));
-        drones[drones.length - 1].position = createVector();
-        drones[drones.length - 1].position.x = random(10, 90);
-        drones[drones.length - 1].position.y = random(250, 1150);
-        drones[drones.length - 1].move = p5.Vector.random2D();
-        drones[drones.length - 1].move.setMag(1.5);
-    }
-
-    //
-
-    //
-
+    //lane 2 drone 
+    sketchDrone(1400, 1490, 110, 1100, 1);
+    //drones in lane 3
+    sketchDrone(160, 1300, 1220, height - 11, 1);
+    
+    //drones in lane 4
+    sketchDrone(10, 90, 250, 1150, 1);
+    
+    
+    
+    
+    droneNumber++;
     // Creating the drones
     for (i = 0; i < drones.length; i++) {
         fill("black");

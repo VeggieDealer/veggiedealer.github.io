@@ -32,12 +32,12 @@ function drawCharacter() {
 
     // runling speeds
 
-    for (let i = 0; i < 20; i ++) {
+    for (let i = 0; i < 20; i++) {
         if (runling.speed < runSpeed[i] && lane == i) {
             runling.speed += 0.2;
         }
     }
-    
+
 
 }
 
@@ -77,18 +77,17 @@ function boundaries() {
     } else if (runling.position.x > 300 && runling.position.x < 395 && runling.position.y > 380 && runling.position.y < 1020) {
         lane = 16;
     } else if (runling.position.x > 300 && runling.position.x < 1045 && runling.position.y > 305 && runling.position.y < 375) {
-        lane = 17;       
+        lane = 17;
     } else if (runling.position.x > 1050 && runling.position.x < 1145 && runling.position.y > 380 && runling.position.y < 945) {
         lane = 18;
     } else if (runling.position.x > 305 && runling.position.x < 1145 && runling.position.y > 850 && runling.position.y < 945) {
         lane = 19;
     } else if (runling.position.x > 400 && runling.position.x < 495 && runling.position.y > 580 && runling.position.y < 945) {
         lane = 20;
-
     }
-               
-               
-               
+
+
+
     if (lane == 1) {
         runling.position.x = constrain(runling.position.x, 3, width - 3);
         runling.position.y = constrain(runling.position.y, 3, 90);
@@ -166,16 +165,3 @@ function sketchDrone(xMin, xMax, yMin, yMax, magSpeed) {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

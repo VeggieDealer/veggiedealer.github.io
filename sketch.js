@@ -37,7 +37,7 @@ function draw() {
 
     if (isNaN(runling.speed)) {
         console.log("fixing...");
-        runling.speed = 0.7;
+        runling.speed = 2;
     }
     fill("white");
     //safe zone 1
@@ -73,7 +73,12 @@ function draw() {
     //safe zone 16
     rect(305, 950, 94, 70);
     //safe zone 17
-    rect(305, 380, 94, 90)
+    rect(305, 380, 94, 90);
+    //safe zone 18
+    rect(950, 380, 94, 90);
+    //safe zone 19
+    rect(950, 850, 94, 92);
+    
     
     drawMap();
     drawCharacter();
@@ -91,7 +96,8 @@ function draw() {
     sketchDrone(160, 1300, 1220, height - 11, 1);
     //drones in lane 4
     sketchDrone(10, 90, 250, 1150, 1);
-
+    //drones in lane 5
+    sketchDrone(110, 1100, 110, 190);
 
 
 

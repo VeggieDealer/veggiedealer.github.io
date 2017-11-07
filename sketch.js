@@ -16,8 +16,14 @@ let speedComplete = false;
 let godMode = -1;
 let level = 1;
 let runSpeed = [0, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2, 4.4];
-
+let volume = 0.1;
+let myMusic;
 // SETUP FUNCTION - Runs once at beginning of program
+function preload() {
+    myMusic = loadSound('Assets/Initial D - Running in The 90s.mp3');
+}
+
+
 function setup() {
     createCanvas(1500, 1300);
     runling.position = createVector(10, 10);
@@ -27,13 +33,15 @@ function setup() {
     baseDrone.position = createVector(0, 0);
     //Calling localStorage
     runling.speed = parseFloat(localStorage.getItem("speed"));
-
+    myMusic.setVolume(volume);
+    myMusic.loop();
 }
 
 // DRAW FUNCTION - Loops @ 60FPS by default
 function draw() {
     background(200, 200, 200);
     fill(200, 200, 200);
+
 
     if (isNaN(runling.speed)) {
         console.log("fixing...");
@@ -181,7 +189,9 @@ function draw() {
             runling.position.add(moveVector);
         }
     }
-
+    
+    
+    
     //LOCAL STORAGE
     localStorage.setItem('speed', runling.speed);
 

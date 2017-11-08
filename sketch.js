@@ -18,9 +18,12 @@ let level = 1;
 let runSpeed = [0, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2, 4.4];
 let volume = 0.1;
 let myMusic;
+let myMusic2;
+let track = 1;
 // SETUP FUNCTION - Runs once at beginning of program
 function preload() {
     myMusic = loadSound('Assets/Initial D - Running in The 90s.mp3');
+     myMusic2 = loadSound('Assets/DejaVu.mp3');
 }
 
 
@@ -34,11 +37,29 @@ function setup() {
     //Calling localStorage
     runling.speed = parseFloat(localStorage.getItem("speed"));
     myMusic.setVolume(volume);
-    myMusic.loop();
+    myMusic2.setVolume(volume);
 }
 
 // DRAW FUNCTION - Loops @ 60FPS by default
 function draw() {
+    
+     if (track == 1) {
+        myMusic.play();
+        track = 3;
+    } else if (track == 2) {
+        myMusic2.play();
+        track = 4;
+    } else if (track == 3) {
+        if (myMusic.isPlaying() == false) {
+            track = 2;
+        }
+    } else if (track == 4) {
+        if (myMusic2.isPlaying() == false) {
+            track = 1;
+        }
+    } 
+    
+    
     background(200, 200, 200);
     fill(200, 200, 200);
 

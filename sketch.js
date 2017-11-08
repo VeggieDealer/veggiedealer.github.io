@@ -23,7 +23,7 @@ let track = 1;
 // SETUP FUNCTION - Runs once at beginning of program
 function preload() {
     myMusic = loadSound('Assets/Initial D - Running in The 90s.mp3');
-     myMusic2 = loadSound('Assets/DejaVu.mp3');
+    myMusic2 = loadSound('Assets/DejaVu.mp3');
 }
 
 
@@ -42,8 +42,8 @@ function setup() {
 
 // DRAW FUNCTION - Loops @ 60FPS by default
 function draw() {
-    
-     if (track == 1) {
+
+    if (track == 1) {
         myMusic.play();
         track = 3;
     } else if (track == 2) {
@@ -57,11 +57,12 @@ function draw() {
         if (myMusic2.isPlaying() == false) {
             track = 1;
         }
-    } 
-    
-    
+    }
+
+
     background(200, 200, 200);
     fill(200, 200, 200);
+    safeZones();
 
 
     if (isNaN(runling.speed)) {
@@ -69,49 +70,23 @@ function draw() {
         runling.speed = 2;
     }
     fill("white");
-    //safe zone 1
-    rect(0, 0, 100, 100);
-    //safe zone 2
-    rect(1377, 0, 122, 96);
-    //safe zone 3
-    rect(1377, 1200, 122, 99);
-    //safe zone 4
-    rect(0, 1200, 100, 99);
-    //safe zone 5
-    rect(0, 105, 100, 95);
-    //safe zone 6
-    rect(1250, 105, 118, 95);
-    //safe zone 7 
-    rect(1250, 1100, 118, 100);
-    //safe zone 8
-    rect(105, 1100, 92, 100);
-    //safe zone 9
-    rect(105, 205, 92, 92);
-    //safe zone 10
-    rect(1150, 205, 94, 92);
-    //safe zone 11
-    rect(1150, 1025, 94, 75);
-    //safe zone 12
-    rect(205, 1025, 94, 75);
-    //safe zone 13
-    rect(205, 305, 94, 70);
-    //safe zone 14
-    rect(1050, 305, 94, 70);
-    //safe zone 15
-    rect(1050, 950, 94, 70);
-    //safe zone 16
-    rect(305, 950, 94, 70);
-    //safe zone 17
-    rect(305, 380, 94, 90);
-    //safe zone 18
-    rect(950, 380, 94, 90);
-    //safe zone 19
-    rect(950, 850, 94, 92);
-    
-    
+
+
     drawMap();
+
+    if (runlingMove) {
+        moveVector = p5.Vector.sub(runlingDestination, runling.position);
+        if (moveVector.mag() > runling.speed) {
+            for(g = 0; g < runling.speed; g++) {
+            moveVector.setMag(1);
+            runling.position.add(moveVector);
+
+            boundaries();
+            }
+        }
+    }
+
     drawCharacter();
-    boundaries();
 
     stroke(0);
 
@@ -126,16 +101,22 @@ function draw() {
     //drones in lane 4
     sketchDrone(10, 90, 250, 1150, 1);
     //drones in lane 5
-    sketchDrone(110, 1100, 110, 190);
+    sketchDrone(110, 1100, 110, 190, 1);
 
 
 
     droneNumber++;
+
+    // Moving the character
+
+
+
     // Creating the drones
     for (i = 0; i < drones.length; i++) {
         fill("black");
         ellipse(drones[i].position.x, drones[i].position.y, drones[i].r);
         drones[i].position.add(drones[i].move);
+
         //lane one drones rebounce
         if (drones[i].position.x < 107 && drones[i].position.x > 100 && drones[i].position.y > 10 && drones[i].position.y < 88) {
             drones[i].move.x *= -1;
@@ -144,7 +125,7 @@ function draw() {
         }
         if (drones[i].position.y < 10) {
             drones[i].move.y *= -1;
-        } else if (drones[i].position.y > 88 && drones[i].position.y < 100 && drones[i].position.x > 107) {
+        } else if (drones[i].position.y > 88 && drones[i].position.y < 100 && drones[i].position.x > 107 && drones[i].position.y < 110) {
             drones[i].move.y *= -1;
         } else if (drones[i].position.y > 88 && drones[i].position.y < 100 && drones[i].position.x < 1370) {
             drones[i].move.y *= -1;
@@ -175,7 +156,7 @@ function draw() {
         } else if (drones[i].position.y > height - 10) {
             drones[i].move.y *= -1;
         }
-        
+
         //lane four Drones rebounce
         if (drones[i].position.x < 10 && drones[i].position.x > 0 && drones[i].position.y > 100 && drones[i].position.y < 1212) {
             drones[i].move.x *= -1;
@@ -188,10 +169,19 @@ function draw() {
             drones[i].move.y *= -1;
         }
 
-        
-        //lane five Dreons reb0unce 
-            
-        
+
+        //lane five Drones reb0unce 
+        if (drones[i].position.x < 110 && drones[i].position.x > 105 && drones[i].position.y > 100 && drones[i].position.y < 190) {
+            drones[i].move.x *= -1;
+        } else if (drones[i].position.x < 1250 && drones[i].position.x > 1260 && drones[i].position.y > 110 && drones[i].position.y < 190) {
+            drones[i].move.x *= -1;
+        }
+        if (drones[i].position.x > 110 && drones[i].position.x < 1250 && drones[i].position.y < 113 && drones[i].position.y > 108) {
+            drones[i].move.y *= -1;
+        } else if (drones[i].position.x > 110 && drones[i].position.x < 1250 && drones[i].position.y > 190 && drones[i].y < 195) {
+            drones[i].move.y *= -1;
+        }
+
 
         //Drone Collision
         if (dist(runling.position.x, runling.position.y, drones[i].position.x, drones[i].position.y) < drones[i].r - 3 && godMode == -1) {
@@ -202,17 +192,9 @@ function draw() {
     }
 
 
-    // Moving the character
-    if (runlingMove) {
-        moveVector = p5.Vector.sub(runlingDestination, runling.position);
-        if (moveVector.mag() > runling.speed) {
-            moveVector.div(moveVector.mag() / runling.speed);
-            runling.position.add(moveVector);
-        }
-    }
-    
-    
-    
+
+
+
     //LOCAL STORAGE
     localStorage.setItem('speed', runling.speed);
 

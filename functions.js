@@ -1,6 +1,11 @@
 function drawMap() {
     strokeWeight(10);
     stroke(0);
+    line(0, 0, 1500, 0);
+    line(1500, 0, 1500, 1300);
+    line(0, 0, 0, 1300);
+    line(0, 1300, 1500, 1300);
+
     line(0, 100, 1375, 100);
     line(1375, 100, 1375, 1200);
     line(1375, 1200, 100, 1200);
@@ -46,11 +51,11 @@ function boundaries() {
 
     if (runling.position.x > 0 && runling.position.x < 1375 && runling.position.y > 0 && runling.position.y < 95) {
         lane = 1;
-    } else if (runling.position.x > 1375 && runling.position.x < width && runling.position.y > 0 && runling.position.y < 1205) {
+    } else if (runling.position.x > 1375 && runling.position.x < 1500 && runling.position.y > 0 && runling.position.y < 1205) {
         lane = 2;
-    } else if (runling.position.x < width && runling.position.x > 95 && runling.position.y > 1200 && runling.position.y < height) {
+    } else if (runling.position.x < 1500 && runling.position.x > 95 && runling.position.y > 1200 && runling.position.y < 1300) {
         lane = 3;
-    } else if (runling.position.x < 100 && runling.position.x > 0 && runling.position.y > 200 && runling.position.y < height) {
+    } else if (runling.position.x < 100 && runling.position.x > 0 && runling.position.y > 200 && runling.position.y < 1300) {
         lane = 4;
     } else if (runling.position.x > 0 && runling.position.x < 1245 && runling.position.y > 110 && runling.position.y < 200) {
         lane = 5;
@@ -89,17 +94,17 @@ function boundaries() {
 
 
     if (lane == 1) {
-        runling.position.x = constrain(runling.position.x, 3, width - 3);
-        runling.position.y = constrain(runling.position.y, 3, 90);
+        runling.position.x = constrain(runling.position.x, 7, 1500 - 3);
+        runling.position.y = constrain(runling.position.y, 7, 93);
     } else if (lane == 2) {
-        runling.position.x = constrain(runling.position.x, 1385, width - 3);
-        runling.position.y = constrain(runling.position.y, 3, height - 3);
+        runling.position.x = constrain(runling.position.x, 1382,  - 6);
+        runling.position.y = constrain(runling.position.y, 7, 1300 - 6);
     } else if (lane == 3) {
-        runling.position.x = constrain(runling.position.x, 5, width - 3);
-        runling.position.y = constrain(runling.position.y, 1210, height - 3);
+        runling.position.x = constrain(runling.position.x, 6, 1500 - 6);
+        runling.position.y = constrain(runling.position.y, 1207, 1300 - 6);
     } else if (lane == 4) {
         runling.position.x = constrain(runling.position.x, 5, 90);
-        runling.position.y = constrain(runling.position.y, 100, height - 3);
+        runling.position.y = constrain(runling.position.y, 100, 1300 - 3);
     } else if (lane == 5) {
         runling.position.x = constrain(runling.position.x, 3, 1365);
         runling.position.y = constrain(runling.position.y, 110, 193);
@@ -153,7 +158,7 @@ function boundaries() {
 }
 
 function sketchDrone(xMin, xMax, yMin, yMax, magSpeed) {
-    if (droneNumber < 11) {
+    if (droneNumber < 6) {
         drones.push(Object.assign({}, baseDrone));
         drones[drones.length - 1].position = createVector();
         drones[drones.length - 1].position.x = random(xMin, xMax);
@@ -206,7 +211,10 @@ function safeZones() {
     //safe zone 18
     rect(950, 380, 94, 90);
     //safe zone 19
-    rect(950, 850, 94, 92);
+    rect(950, 850, 94, 93);
 
 }
 
+function cameraControl() {
+    camera(runling.position.x - width   / 2, runling.position.y - height / 2, 0);
+}

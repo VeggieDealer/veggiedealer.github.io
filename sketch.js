@@ -28,7 +28,7 @@ function preload() {
 
 
 function setup() {
-    createCanvas(1500, 1300);
+    createCanvas(1000, 800);
     runling.position = createVector(10, 10);
     runlingDestination = createVector(0, 0);
     droneNumber = 0;
@@ -43,31 +43,37 @@ function setup() {
 // DRAW FUNCTION - Loops @ 60FPS by default
 function draw() {
 
-    if (track == 1) {
-        myMusic.play();
-        track = 3;
-    } else if (track == 2) {
-        myMusic2.play();
-        track = 4;
-    } else if (track == 3) {
-        if (myMusic.isPlaying() == false) {
-            track = 2;
+    if (runling.speed >= 2) {
+        if (track == 1) {
+            myMusic.play();
+            track = 3;
+        } else if (track == 2) {
+            myMusic2.play();
+            track = 4;
+        } else if (track == 3) {
+            if (myMusic.isPlaying() == false) {
+                track = 2;
+            }
+        } else if (track == 4) {
+            if (myMusic2.isPlaying() == false) {
+                track = 1;
+            }
         }
-    } else if (track == 4) {
-        if (myMusic2.isPlaying() == false) {
-            track = 1;
-        }
+
     }
 
 
     background(200, 200, 200);
+    cameraControl();
     fill(200, 200, 200);
     safeZones();
 
 
+
+
     if (isNaN(runling.speed)) {
         console.log("fixing...");
-        runling.speed = 2;
+        runling.speed = 0.6;
     }
     fill("white");
 
@@ -77,11 +83,11 @@ function draw() {
     if (runlingMove) {
         moveVector = p5.Vector.sub(runlingDestination, runling.position);
         if (moveVector.mag() > runling.speed) {
-            for(g = 0; g < runling.speed; g++) {
-            moveVector.setMag(1);
-            runling.position.add(moveVector);
+            for (g = 0; g < runling.speed; g++) {
+                moveVector.setMag(0.5);
+                runling.position.add(moveVector);
 
-            boundaries();
+                boundaries();
             }
         }
     }
@@ -93,16 +99,17 @@ function draw() {
 
     // Assigning the drones random spots within the lane and giving them random speeds
     //lane 1 drone 
-    sketchDrone(115, 1300, 10, 88, 1);
+    sketchDrone(115, 1300, 10, 88, 0.5);
     //lane 2 drone 
-    sketchDrone(1400, 1490, 110, 1100, 1);
+    sketchDrone(1400, 1490, 110, 1100, 0.5);
     //drones in lane 3
-    sketchDrone(160, 1300, 1220, height - 11, 1);
+    sketchDrone(160, 1300, 1220, 1300 - 11, 0.5);
     //drones in lane 4
-    sketchDrone(10, 90, 250, 1150, 1);
+    sketchDrone(10, 85, 250, 1150, 0.5);
     //drones in lane 5
-    sketchDrone(110, 1100, 110, 190, 1);
-
+    sketchDrone(110, 1100, 115, 185, 0.5);
+    //drones in lane 6
+    sketchDrone(1280, 1360, 210, 1100, 0);
 
 
     droneNumber++;
@@ -135,12 +142,12 @@ function draw() {
         //lane two Drones rebounce
         if (drones[i].position.x < 1385 && drones[i].position.x > 1375 && drones[i].position.y > 100) {
             drones[i].move.x *= -1;
-        } else if (drones[i].position.x > width - 10 && drones[i].position.y > 100) {
+        } else if (drones[i].position.x > 1500 - 10 && drones[i].position.y > 100) {
             drones[i].move.x *= -1;
         }
-        if (drones[i].position.y < 105 && drones[i].position.x < width && drones[i].position.x > 1380) {
+        if (drones[i].position.y < 105 && drones[i].position.x < 1500 && drones[i].position.x > 1380) {
             drones[i].move.y *= -1;
-        } else if (drones[i].position.y > 1192 && drones[i].position.x < width && drones[i].position.x > 1380) {
+        } else if (drones[i].position.y > 1192 && drones[i].position.x < 1500 && drones[i].position.x > 1380) {
             drones[i].move.y *= -1;
         }
 
@@ -153,7 +160,7 @@ function draw() {
         }
         if (drones[i].position.y < 1212 && drones[i].position.y > 1210 && drones[i].position.x > 100 && drones[i].position.x < 1380) {
             drones[i].move.y *= -1;
-        } else if (drones[i].position.y > height - 10) {
+        } else if (drones[i].position.y > 1300 - 10) {
             drones[i].move.y *= -1;
         }
 
@@ -173,23 +180,32 @@ function draw() {
         //lane five Drones reb0unce 
         if (drones[i].position.x < 110 && drones[i].position.x > 105 && drones[i].position.y > 100 && drones[i].position.y < 190) {
             drones[i].move.x *= -1;
-        } else if (drones[i].position.x < 1250 && drones[i].position.x > 1260 && drones[i].position.y > 110 && drones[i].position.y < 190) {
+        } else if (drones[i].position.x > 1240 && drones[i].position.x < 1250 && drones[i].position.y > 110 && drones[i].position.y < 190) {
             drones[i].move.x *= -1;
         }
         if (drones[i].position.x > 110 && drones[i].position.x < 1250 && drones[i].position.y < 113 && drones[i].position.y > 108) {
             drones[i].move.y *= -1;
-        } else if (drones[i].position.x > 110 && drones[i].position.x < 1250 && drones[i].position.y > 190 && drones[i].y < 195) {
+        } else if (drones[i].position.x > 110 && drones[i].position.x < 1250 && drones[i].position.y > 185 && drones[i].position.y < 190) {
             drones[i].move.y *= -1;
+        }
+        //lane six Drones rebounce
+        if (drones[i].position.x < 1260 && drones[i].position.x > 1250 && drones[i].position.y < 220 && drones[i].position.y > 210) {
+            drones[i].move.x *= -1;
+        } else if (drones[i].position.x > 1370 && drones[i].position.x < 1380 && drones[i].position.y < 220 && drones[i].position.y > 210) {
+            drones[i].move.x *= -1;
         }
 
 
-        //Drone Collision
+
+
+        //Drone Collision with runling
         if (dist(runling.position.x, runling.position.y, drones[i].position.x, drones[i].position.y) < drones[i].r - 3 && godMode == -1) {
             runling.position.x = 10;
             runling.position.y = 10;
             runlingMove = false;
         }
     }
+
 
 
 
@@ -202,8 +218,8 @@ function draw() {
 
 function mousePressed() {
     runlingMove = true;
-    runlingDestination.x = mouseX;
-    runlingDestination.y = mouseY;
+    runlingDestination.x = mouseX - width / 2 + runling.position.x;
+    runlingDestination.y = mouseY - height / 2 + runling.position.y;
 }
 
 

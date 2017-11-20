@@ -22,8 +22,8 @@ let myMusic2;
 let track = 1;
 // SETUP FUNCTION - Runs once at beginning of program
 function preload() {
-    myMusic = loadSound('Assets/Initial D - Running in The 90s.mp3');
-    myMusic2 = loadSound('Assets/DejaVu.mp3');
+    myMusic = loadSound("Assets/Initial D - Running in The 90s.mp3");
+    myMusic2 = loadSound("Assets/DejaVu.mp3");
 }
 
 
@@ -43,7 +43,7 @@ function setup() {
 // DRAW FUNCTION - Loops @ 60FPS by default
 function draw() {
 
-    if (runling.speed >= 2) {
+    if (runling.speed >= 4) {
         if (track == 1) {
             myMusic.play();
             track = 3;
@@ -82,13 +82,11 @@ function draw() {
 
     if (runlingMove) {
         moveVector = p5.Vector.sub(runlingDestination, runling.position);
-        if (moveVector.mag() > runling.speed) {
-            for (g = 0; g < runling.speed; g++) {
-                moveVector.setMag(0.5);
-                runling.position.add(moveVector);
-
-                boundaries();
-            }
+        moveVector.setMag(runling.speed);
+        runling.position.add(moveVector);
+        boundaries();
+        if (dist(runling.position.x, runling.position.y, runlingDestination.x, runlingDestination.y) < 5) {
+            runlingMove = false;
         }
     }
 
@@ -194,6 +192,7 @@ function draw() {
         } else if (drones[i].position.x > 1370 && drones[i].position.x < 1380 && drones[i].position.y < 220 && drones[i].position.y > 210) {
             drones[i].move.x *= -1;
         }
+
 
 
 

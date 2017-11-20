@@ -73,9 +73,9 @@ function boundaries() {
         lane = 11;
     } else if (runling.position.x > 210 && runling.position.x < 290 && runling.position.y > 300 && runling.position.y < 1095) {
         lane = 12;
-    } else if (runling.position.x > 210 && runling.position.x < 1000 && runling.position.y > 300 && runling.position.y < 390) {
+    } else if (runling.position.x > 210 && runling.position.x < 1045 && runling.position.y > 300 && runling.position.y < 390) {
         lane = 13;
-    } else if (runling.position.x > 1050 && runling.position.x < 1150 && runling.position.y > 305 && runling.position.y < 1020) {
+    } else if (runling.position.x > 1050 && runling.position.x < 1150 && runling.position.y > 305 && runling.position.y < 1010) {
         lane = 14;
     } else if (runling.position.x > 300 && runling.position.x < 1145 && runling.position.y > 950 && runling.position.y < 1020) {
         lane = 15;
@@ -97,7 +97,7 @@ function boundaries() {
         runling.position.x = constrain(runling.position.x, 7, 1500 - 3);
         runling.position.y = constrain(runling.position.y, 7, 93);
     } else if (lane == 2) {
-        runling.position.x = constrain(runling.position.x, 1382,  - 6);
+        runling.position.x = constrain(runling.position.x, 1380, 1500 - 6);
         runling.position.y = constrain(runling.position.y, 7, 1300 - 6);
     } else if (lane == 3) {
         runling.position.x = constrain(runling.position.x, 6, 1500 - 6);
@@ -133,11 +133,11 @@ function boundaries() {
         runling.position.x = constrain(runling.position.x, 210, 1137);
         runling.position.y = constrain(runling.position.y, 310, 365);
     } else if (lane == 14) {
-        runling.position.x = constrain(runling.position.x, 210, 1137);
-        runling.position.y = constrain(runling.position.y, 310, 365);
+        runling.position.x = constrain(runling.position.x, 1060, 1143);
+        runling.position.y = constrain(runling.position.y, 310, 1020);
     } else if (lane == 15) {
-        runling.position.x = constrain(runling.position.x, 1050, 1145);
-        runling.position.y = constrain(runling.position.y, 305, 1020);
+        runling.position.x = constrain(runling.position.x, 305, 1143);
+        runling.position.y = constrain(runling.position.y, 950, 1020);
     } else if (lane == 16) {
         runling.position.x = constrain(runling.position.x, 300, 395);
         runling.position.y = constrain(runling.position.y, 380, 1020);
@@ -216,5 +216,5 @@ function safeZones() {
 }
 
 function cameraControl() {
-    camera(runling.position.x - width   / 2, runling.position.y - height / 2, 0);
+    camera(runling.position.x - width / 2, runling.position.y - height / 2, 0);
 }

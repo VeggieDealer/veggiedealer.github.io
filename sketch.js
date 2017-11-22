@@ -110,12 +110,12 @@ function draw() {
 
     //LOCAL STORAGE
     localStorage.setItem('speed', runling.speed);
-}
-
-function mousePressed() {
+    
+    if (mouseIsPressed) {
     runlingMove = true;
     runlingDestination.x = mouseX - width / 2 + runling.position.x;
-    runlingDestination.y = mouseY - height / 2 + runling.position.y;
+    runlingDestination.y = mouseY - height / 2 + runling.position.y; 
+    }
 }
 
 

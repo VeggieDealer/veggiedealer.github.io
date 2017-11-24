@@ -12,9 +12,27 @@ function sketchDrone(xMin, xMax, yMin, yMax, magSpeed) {
 }
 
 function sketchBlueDrone() {
-    if (frameCount % 5 == 0) {
+    if (frameCount % 1 == 0) {
         blueDrones.push(new baseBlueDrone());
-        blueDrones[blueDrones.length - 1].move.setMag(0.1);
+        blueDrones[blueDrones.length - 1].move.setMag(3);
+    }
+
+
+    for (j = 0; j < blueDrones.length; j++) {
+        fill("blue");
+        ellipse(blueDrones[j].position.x, blueDrones[j].position.y, blueDrones[j].r);
+        blueDrones[j].position.add(blueDrones[j].move);
+
+        if (blueDrones[j].position.x < 0 || blueDrones[j].position.x > 1500 || blueDrones[j].position.y < 0 || blueDrones[j].position.y > 1300) {
+            blueDrones.splice(j, 1);
+        }
+
+        if (dist(runling.position.x, runling.position.y, blueDrones[j].position.x, blueDrones[j].position.y) < blueDrones[j].r - 3 && godMode == -1) {
+            runling.position.x = 10;
+            runling.position.y = 10;
+            runlingMove = false;
+        }
+
     }
 
 }
@@ -96,26 +114,6 @@ function droneBounce() {
         } else if (drones[i].position.x > 1370 && drones[i].position.x < 1380 && drones[i].position.y < 220 && drones[i].position.y > 210) {
             drones[i].move.x *= -1;
         }
-
-
-        for (j = 0; j < blueDrones.length; j++) {
-            fill("blue");
-            ellipse(blueDrones[j].position.x, blueDrones[j].position.y, blueDrones[j].r);
-            blueDrones[j].position.add(blueDrones[j].move);
-
-            if (blueDrones[j].position.x < 0 || blueDrones[j].position.x > 1500 || blueDrones[j].position.y < 0 || blueDrones[j].position.y > 1300) {
-                blueDrones.splice(j, 1);
-            }
-
-            if (dist(runling.position.x, runling.position.y, blueDrones[j].position.x, blueDrones[j].position.y) < blueDrones[j].r - 3 && godMode == -1) {
-                runling.position.x = 10;
-                runling.position.y = 10;
-                runlingMove = false;
-            }
-
-        }
-
-
 
 
         //Drone Collision with runling

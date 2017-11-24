@@ -55,22 +55,24 @@ function boundaries() {
         lane = 11;
     } else if (runling.position.x > 210 && runling.position.x < 290 && runling.position.y > 375 && runling.position.y < 1095) {
         lane = 12;
-    } else if (runling.position.x > 210 && runling.position.x < 1045 && runling.position.y > 300 && runling.position.y < 390) {
+    } else if (runling.position.x > 210 && runling.position.x < 1045 && runling.position.y > 300 && runling.position.y < 365) {
         lane = 13;
     } else if (runling.position.x > 1050 && runling.position.x < 1150 && runling.position.y > 305 && runling.position.y < 950) {
         lane = 14;
     } else if (runling.position.x > 400 && runling.position.x < 1145 && runling.position.y > 950 && runling.position.y < 1020) {
         lane = 15;
-    } else if (runling.position.x > 300 && runling.position.x < 395 && runling.position.y > 380 && runling.position.y < 1020) {
+    } else if (runling.position.x > 300 && runling.position.x < 395 && runling.position.y > 475 && runling.position.y < 1020) {
         lane = 16;
-    } else if (runling.position.x > 300 && runling.position.x < 1045 && runling.position.y > 305 && runling.position.y < 375) {
+    } else if (runling.position.x > 300 && runling.position.x < 949 && runling.position.y < 475 && runling.position.y > 375) {
         lane = 17;
-    } else if (runling.position.x > 1050 && runling.position.x < 1145 && runling.position.y > 380 && runling.position.y < 945) {
+    } else if (runling.position.x > 951 && runling.position.x < 1045 && runling.position.y > 380 && runling.position.y < 845) {
         lane = 18;
-    } else if (runling.position.x > 405 && runling.position.x < 1045 && runling.position.y > 850 && runling.position.y < 945) {
+    } else if (runling.position.x > 505 && runling.position.x < 1045 && runling.position.y > 850 && runling.position.y < 945) {
         lane = 19;
-    } else if (runling.position.x > 405 && runling.position.x < 500 && runling.position.y > 483 && runling.position.y < 945) {
+    } else if (runling.position.x > 405 && runling.position.x < 495 && runling.position.y > 483 && runling.position.y < 945) {
         lane = 20;
+    } else if (runling.position.x > 495 && runling.position.x < 940 && runling.position.y > 482 && runling.position.y < 545) {
+        lane = 21;
     }
 
 
@@ -121,20 +123,23 @@ function boundaries() {
         runling.position.x = constrain(runling.position.x, 305, 1143);
         runling.position.y = constrain(runling.position.y, 955, 1018);
     } else if (lane == 16) {
-        runling.position.x = constrain(runling.position.x, 303, 395);
+        runling.position.x = constrain(runling.position.x, 307, 395);
         runling.position.y = constrain(runling.position.y, 380, 1020);
     } else if (lane == 17) {
-        runling.position.x = constrain(runling.position.x, 300, 1045);
-        runling.position.y = constrain(runling.position.y, 305, 375);
+        runling.position.x = constrain(runling.position.x, 307, 1045);
+        runling.position.y = constrain(runling.position.y, 385, 470);
     } else if (lane == 18) {
-        runling.position.x = constrain(runling.position.x, 1050, 1145);
-        runling.position.y = constrain(runling.position.y, 380, 945);
+        runling.position.x = constrain(runling.position.x, 955, 1040);
+        runling.position.y = constrain(runling.position.y, 385, 945);
     } else if (lane == 19) {
-        runling.position.x = constrain(runling.position.x, 408, 1045);
-        runling.position.y = constrain(runling.position.y, 850, 945);
+        runling.position.x = constrain(runling.position.x, 410, 1045);
+        runling.position.y = constrain(runling.position.y, 855, 943);
     } else if (lane == 20) {
-        runling.position.x = constrain(runling.position.x, 408, 500);
-        runling.position.y = constrain(runling.position.y, 483, 945);
+        runling.position.x = constrain(runling.position.x, 408, 495);
+        runling.position.y = constrain(runling.position.y, 483, 943);
+    } else if (lane == 21) {
+        runling.position.x = 10;
+        runling.position.y = 10;
     }
 
 }

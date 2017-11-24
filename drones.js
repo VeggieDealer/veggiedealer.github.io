@@ -12,7 +12,7 @@ function sketchDrone(xMin, xMax, yMin, yMax, magSpeed) {
 }
 
 function sketchBlueDrone() {
-    if (frameCount % 1 == 0) {
+    if (frameCount % 4 == 0) {
         blueDrones.push(new baseBlueDrone());
         blueDrones[blueDrones.length - 1].move.setMag(3);
     }

@@ -140,6 +140,7 @@ function boundaries() {
     } else if (lane == 21) {
         runling.position.x = 10;
         runling.position.y = 10;
+        runlingMove = false;
     }
 
 }

@@ -81,13 +81,13 @@ function draw() {
     //LOCAL STORAGE
     localStorage.setItem('speed', runling.speed);
     
-    if (mouseIsPressed) {
+}
+
+function mousePressed() {    
     runlingMove = true;
     runlingDestination.x = mouseX - width / 2 + runling.position.x;
     runlingDestination.y = mouseY - height / 2 + runling.position.y; 
-    }
 }
-
 
 function keyPressed() {
     if (keyCode == 83) {

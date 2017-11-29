@@ -22,8 +22,9 @@ class baseBlueDrone {
 let lane = 0;
 let speedComplete = false;
 let godMode = -1;
+let invincible = -1; 
 let level = 1;
-let runSpeed = [0, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4, 4, 4];
+let runSpeed = [0, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2, 4.4, 4.4, 4.4];
 // SETUP FUNCTION - Runs once at beginning of program
 
 function setup() {
@@ -49,6 +50,9 @@ function draw() {
         console.log("fixing...");
         runling.speed = runSpeed[1];
     }
+    if (runling.speed > 4.4) {
+        runling.speed = 4.4;
+    }
     fill("white");
 
 
@@ -59,19 +63,20 @@ function draw() {
 
 
     // Assigning the drones random spots within the lane and giving them random speeds
-    //lane 1 drone 
-//    sketchDrone(115, 1300, 10, 88, 0.7);
-    //lane 2 drone 
-//    sketchDrone(1400, 1490, 110, 1100, 0.7);
-    //drones in lane 3
-//    sketchDrone(160, 1300, 1220, 1300 - 11, 0.7);
-    //drones in lane 4
-//    sketchDrone(10, 85, 250, 1150, 0.7);
-    //drones in lane 5
-//    sketchDrone(110, 1100, 115, 185, 0.7);
-    //drones in lane 6
-//    sketchDrone(1280, 1360, 210, 1100, 0);
-
+//    lane 1 drone 
+    sketchDrone(115, 1300, 10, 88, 0.7);
+//    lane 2 drone 
+    sketchDrone(1400, 1490, 110, 1100, 0.7);
+//    drones in lane 3
+    sketchDrone(160, 1300, 1220, 1300 - 11, 0.7);
+//    drones in lane 4
+    sketchDrone(10, 85, 250, 1150, 0.7);
+//    drones in lane 5
+    sketchDrone(110, 1100, 115, 185, 0.7);
+//    drones in lane 6
+    sketchDrone(1280, 1360, 210, 1100, 0.7);
+//    drones in lane 7
+    sketchDrone(225, 1190, 1110, 1180, 0.7);
     //BLUE DRONES
     sketchBlueDrone();
 
@@ -95,7 +100,7 @@ function keyPressed() {
     }
 
     if (keyCode == 71) {
-        godMode *= -1
+        invincible *= -1;
     }
 
 }

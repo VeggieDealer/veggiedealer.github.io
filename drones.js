@@ -27,7 +27,8 @@ function sketchBlueDrone() {
             blueDrones.splice(j, 1);
         }
 
-        if (dist(runling.position.x, runling.position.y, blueDrones[j].position.x, blueDrones[j].position.y) < blueDrones[j].r - 3 && godMode == -1) {
+        //Blue Drone Collision with runling
+        if (dist(runling.position.x, runling.position.y, blueDrones[j].position.x, blueDrones[j].position.y) < blueDrones[j].r - 3 && godMode == -1 && invincible == -1) {
             runling.position.x = 10;
             runling.position.y = 10;
             runlingMove = false;
@@ -109,15 +110,33 @@ function droneBounce() {
             drones[i].move.y *= -1;
         }
         //lane six Drones rebounce
-        if (drones[i].position.x < 1260 && drones[i].position.x > 1250 && drones[i].position.y < 220 && drones[i].position.y > 210) {
+        if (drones[i].position.x < 1260 && drones[i].position.x > 1250 && drones[i].position.y < 1110 && drones[i].position.y > 200) {
             drones[i].move.x *= -1;
-        } else if (drones[i].position.x > 1370 && drones[i].position.x < 1380 && drones[i].position.y < 220 && drones[i].position.y > 210) {
+        } else if (drones[i].position.x > 1360 && drones[i].position.x < 1370 && drones[i].position.y < 1110 && drones[i].position.y > 200) {
             drones[i].move.x *= -1;
+        }
+        
+        if (drones[i].position.y < 210 && drones[i].position.y > 200 && drones[i].position.x > 1255 && drones[i].position.x < 1365) {
+            drones[i].move.y *= -1;
+        } else if (drones[i].position.y < 1100 && drones[i].position.y > 1095 && drones[i].position.x > 1255 && drones[i].position.x < 1365) {
+            drones[i].move.y *= -1;
+        }
+        // lane seven Drones rebounce
+        if (drones[i].position.x < 205 && drones[i].position.x > 200 && drones[i].position.y > 1100 && drones[i].position.y < 1190) {
+            drones[i].move.x *= -1;
+        } else if (drones[i].position.x < 1250 && drones[i].position.x > 1245 && drones[i].position.y > 1100 && drones[i].position.y < 1190) {
+            drones[i].move.x *= -1;
+        }
+        
+        if (drones[i].position.y > 1105 && drones[i].position.y < 1110 && drones[i].position.x < 1250 && drones[i].position.x > 205) {
+            drones[i].move.y *= -1;
+        } else if (drones[i].position.y < 1190 && drones[i].position.y > 1185 && drones[i].position.x < 1250 && drones[i].position.x > 205) {
+            drones[i].move.y *= -1;
         }
 
 
         //Drone Collision with runling
-        if (dist(runling.position.x, runling.position.y, drones[i].position.x, drones[i].position.y) < drones[i].r - 3 && godMode == -1) {
+        if (dist(runling.position.x, runling.position.y, drones[i].position.x, drones[i].position.y) < drones[i].r - 3 && godMode == -1 && invincible == -1) {
             runling.position.x = 10;
             runling.position.y = 10;
             runlingMove = false;

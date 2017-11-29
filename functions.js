@@ -74,6 +74,49 @@ function safeZones() {
     //safe zone 19
     rect(950, 850, 94, 93);
 
+    
+    
+    if (runling.position.x > 0 && runling.position.x < 100 && runling.position.y > 0 && runling.position.y < 100) {
+        godMode = 1;
+    } else if (runling.position.x > 1377 && runling.position.x < 1500 && runling.position.y > 0 && runling.position.y < 96) {
+        godMode = 1;
+    } else if (runling.position.x > 1377 && runling.position.x < 1500 && runling.position.y > 1200 && runling.position.y < 1300) {
+        godMode = 1;
+    } else if (runling.position.x > 0 && runling.position.x < 100 && runling.position.y > 1200 && runling.position.y < 1300) {
+        godMode = 1;
+    } else if (runling.position.x > 0 && runling.position.x < 100 && runling.position.y > 105 && runling.position.y < 200) {
+        godMode = 1;
+    } else if (runling.position.x > 1250 && runling.position.x < 1370 && runling.position.y > 105 && runling.position.y < 200) {
+        godMode = 1;
+    } else if (runling.position.x > 1250 && runling.position.x < 1370 && runling.position.y > 1100 && runling.position.y < 1200) {
+        godMode = 1;
+    } else if (runling.position.x > 105 && runling.position.x < 200 && runling.position.y > 1100 && runling.position.y < 1200) {
+        godMode = 1;
+    } else if (runling.position.x > 105 && runling.position.x < 200 && runling.position.y > 205 && runling.position.y < 300) {
+        godMode = 1;
+    } else if (runling.position.x > 1150 && runling.position.x < 1245 && runling.position.y > 205 && runling.position.y < 300) {
+        godMode = 1;
+    } else if (runling.position.x > 1150 && runling.position.x < 1245 && runling.position.y > 1025 && runling.position.y < 1100) {
+        godMode = 1;
+    } else if (runling.position.x > 205 && runling.position.x < 300 && runling.position.y > 1025 && runling.position.y < 1100) {
+        godMode = 1;
+    } else if (runling.position.x > 205 && runling.position.x < 300 && runling.position.y > 305 && runling.position.y < 375) {
+        godMode = 1;
+    } else if (runling.position.x > 1050 && runling.position.x < 1150 && runling.position.y > 305 && runling.position.y < 375) {
+        godMode = 1;
+    } else if (runling.position.x > 1050 && runling.position.x < 1150 && runling.position.y > 950 && runling.position.y < 1025) {
+        godMode = 1;
+    } else if (runling.position.x > 305 && runling.position.x < 400 && runling.position.y > 950 && runling.position.y < 1020) {
+        godMode = 1;
+    } else if (runling.position.x > 305 && runling.position.x < 400 && runling.position.y > 380 && runling.position.y < 470) {
+        godMode = 1;
+    } else if (runling.position.x > 950 && runling.position.x < 1040 && runling.position.y > 380 && runling.position.y < 470) {
+        godMode = 1;
+    } else if (runling.position.x > 950 && runling.position.x < 1040 && runling.position.y > 850 && runling.position.y < 940) {
+        godMode = 1;
+    } else {
+        godMode = -1;
+    }
 }
 
 function cameraControl() {

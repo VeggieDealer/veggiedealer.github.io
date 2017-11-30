@@ -1,5 +1,5 @@
 function sketchDrone(xMin, xMax, yMin, yMax, magSpeed) {
-    if (droneNumber < 6) {
+    if (droneNumber < 7) {
         drones.push(Object.assign({}, baseDrone));
         drones[drones.length - 1].position = createVector();
         drones[drones.length - 1].position.x = random(xMin, xMax);
@@ -133,7 +133,18 @@ function droneBounce() {
         } else if (drones[i].position.y < 1190 && drones[i].position.y > 1185 && drones[i].position.x < 1250 && drones[i].position.x > 205) {
             drones[i].move.y *= -1;
         }
+        //lane eight drones rebounce
+        if (drones[i].position.x < 110 && drones[i].position.x > 105 && drones[i].position.y > 290 && drones[i].position.y < 1110) {
+            drones[i].move.x *= -1;
+        } else if (drones[i].position.x > 190 && drones[i].position.x < 195 && drones[i].position.y > 290 && drones[i].position.y < 1110) {
+            drones[i].move.x *= -1;
+        }
 
+        if (drones[i].position.y < 305 && drones[i].position.y > 300 && drones[i].position.x > 110 && drones[i].position.x < 190) {
+            drones[i].move.y *= -1;
+        } else if (drones[i].position.y > 1095 && drones[i].position.y < 1100 && drones[i].position.x > 110 && drones[i].position.x < 190) {
+            drones[i].move.y *= -1;
+        }
 
         //Drone Collision with runling
         if (dist(runling.position.x, runling.position.y, drones[i].position.x, drones[i].position.y) < drones[i].r - 3 && godMode == -1 && invincible == -1) {

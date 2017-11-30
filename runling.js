@@ -12,9 +12,9 @@ function runMove() {
 }
 
 function drawCharacter() {
-    stroke("blue")
+    stroke("orange")
     strokeWeight(1);
-    fill("blue");
+    fill("orange");
     ellipse(runling.position.x, runling.position.y, 4);
 
     // runling speeds

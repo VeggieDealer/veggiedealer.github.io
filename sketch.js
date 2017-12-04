@@ -78,8 +78,11 @@ function draw() {
     sketchDrone(225, 1180, 1110, 1180, 0.7);
 //    drones in lane 8
     sketchDrone(110, 180, 320, 1070, 0.7);
+//    drone in lane 9
+    sketchDrone(230, 1140, 220, 280, 0.7);
+    
     //BLUE DRONES
-//    sketchBlueDrone();
+    sketchBlueDrone();
 
     droneNumber++;
     droneBounce();

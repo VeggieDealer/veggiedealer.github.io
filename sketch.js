@@ -24,7 +24,7 @@ let speedComplete = false;
 let godMode = -1;
 let invincible = -1;
 let level = 1;
-let runSpeed = [0, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2, 4.4];
+let runSpeed = [0, 1.2, 1.35, 1.55, 1.75, 1.95, 2.15, 2.35, 2.55, 2.75, 2.95, 3.15, 3.35, 3.55, 3.75, 3.95, 4.15, 4.35];
 
 function setup() {
     createCanvas(1000, 800);
@@ -89,7 +89,7 @@ function draw() {
     //    drones in lane 13
     sketchDrone(320, 1030, 315, 360, 0.7);
     //BLUE DRONES
-    sketchBlueDrone();
+    //    sketchBlueDrone();
 
     droneNumber++;
     droneBounce();

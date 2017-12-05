@@ -15,7 +15,7 @@ function sketchBlueDrone() {
     if (frameCount % 3 == 0) {
         blueDrones.push(new baseBlueDrone());
         blueDrones[blueDrones.length - 1].move.setMag(3);
-        blueDrones[blueDrones.length - 1].r = 15
+        blueDrones[blueDrones.length - 1].r = 30
     }
 
 

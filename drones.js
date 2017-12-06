@@ -1,4 +1,4 @@
-function sketchDrone(xMin, xMax, yMin, yMax, magSpeed) {
+function sketchDrone(xMin, xMax, yMin, yMax, magSpeed, r) {
     if (droneNumber < 7) {
         drones.push(Object.assign({}, baseDrone));
         drones[drones.length - 1].position = createVector();
@@ -6,7 +6,7 @@ function sketchDrone(xMin, xMax, yMin, yMax, magSpeed) {
         drones[drones.length - 1].position.y = random(yMin, yMax);
         drones[drones.length - 1].move = p5.Vector.random2D();
         drones[drones.length - 1].move.setMag(magSpeed);
-
+        drones[drones.length - 1].r = r;
 
     }
 }
@@ -15,7 +15,7 @@ function sketchBlueDrone() {
     if (frameCount % 3 == 0) {
         blueDrones.push(new baseBlueDrone());
         blueDrones[blueDrones.length - 1].move.setMag(3);
-        blueDrones[blueDrones.length - 1].r = 30
+        blueDrones[blueDrones.length - 1].r = 15
     }
 
 
@@ -176,7 +176,7 @@ function droneBounce() {
         } else if (drones[i].position.x > 1145 && drones[i].position.x < 1150 && drones[i].position.y > 1035 && drones[i].position.y < 1090) {
             drones[i].move.x *= -1;
         }
-        
+
         if (drones[i].position.x > 300 && drones[i].position.x < 1150 && drones[i].position.y > 1030 && drones[i].position.y < 1035) {
             drones[i].move.y *= -1;
         } else if (drones[i].position.x > 300 && drones[i].position.x < 1150 && drones[i].position.y > 1090 && drones[i].position.y < 1095) {
@@ -200,16 +200,75 @@ function droneBounce() {
         } else if (drones[i].position.x > 1045 && drones[i].position.x < 1050 && drones[i].position.y > 300 && drones[i].position.y < 370) {
             drones[i].move.x *= -1;
         }
-        
+
         if (drones[i].position.x > 300 && drones[i].position.x < 1050 && drones[i].position.y > 305 && drones[i].position.y < 310) {
             drones[i].move.y *= -1;
         } else if (drones[i].position.x > 300 && drones[i].position.x < 1050 && drones[i].position.y > 365 && drones[i].position.y < 370) {
             drones[i].move.y *= -1;
         }
         // lane 14
+        if (drones[i].position.x > 1055 && drones[i].position.x < 1060 && drones[i].position.y > 375 && drones[i].position.y < 950) {
+            drones[i].move.x *= -1;
+        } else if (drones[i].position.x > 1140 && drones[i].position.x < 1145 && drones[i].position.y > 375 && drones[i].position.y < 950) {
+            drones[i].move.x *= -1;
+        }
+
+        if (drones[i].position.x > 1045 && drones[i].position.x < 1145 && drones[i].position.y < 385 && drones[i].position.y > 380) {
+            drones[i].move.y *= -1;
+        } else if (drones[i].position.x > 1045 && drones[i].position.x < 1145 && drones[i].position.y > 945 && drones[i].position.y < 950) {
+            drones[i].move.y *= -1;
+        }
+        // lane 15
+        if (drones[i].position.x > 400 && drones[i].position.x < 405 && drones[i].position.y > 950 && drones[i].position.y < 1020) {
+            drones[i].move.x *= -1;
+        } else if (drones[i].position.x > 1045 && drones[i].position.x < 1050 && drones[i].position.y > 950 && drones[i].position.y < 1020) {
+            drones[i].move.x *= -1;
+        }
+
+        if (drones[i].position.x > 400 && drones[i].position.x < 1050 && drones[i].position.y > 955 && drones[i].position.y < 960) {
+            drones[i].move.y *= -1;
+        } else if (drones[i].position.x > 400 && drones[i].position.x < 1050 && drones[i].position.y > 1015 && drones[i].position.y < 1020) {
+            drones[i].move.y *= -1;
+        }
+        //lane 16
+        if (drones[i].position.x > 305 && drones[i].position.x < 310 && drones[i].position.y > 470 && drones[i].position.y < 945) {
+            drones[i].move.x *= -1;
+        } else if (drones[i].position.x > 390 && drones[i].position.x < 395 && drones[i].position.y > 470 && drones[i].position.y < 945) {
+            drones[i].move.x *= -1;
+        } 
+        
+        if (drones[i].position.x > 300 && drones[i].position.x < 400 && drones[i].position.y > 475 && drones[i].position.y < 480) {
+            drones[i].move.y *= -1;
+        } else if (drones[i].position.x > 300 && drones[i].position.x < 400 && drones[i].position.y > 945 && drones[i].position.y < 950) {
+            drones[i].move.y *= -1;
+        }
+        //lane17
+        if (drones[i].position.x > 400 && drones[i].position.x < 405 && drones[i].position.y > 380 && drones[i].position.y < 470) {
+            drones[i].move.x *= -1;
+        } else if (drones[i].position.x > 945 && drones[i].position.x < 950 && drones[i].position.y > 380 && drones[i].position.y < 470) {
+            drones[i].move.x *= -1;
+        }
+        
+        if (drones[i].position.x > 400 && drones[i].position.x < 955 && drones[i].position.y > 385 && drones[i].position.y < 390) {
+            drones[i].move.y *= -1;
+        } else if (drones[i].position.x > 400 && drones[i].position.x < 955 && drones[i].position.y > 465 && drones[i].position.y < 470) {
+            drones[i].move.y *= -1;
+        }
+        //lane18
+        if (drones[i].position.x > 955 && drones[i].position.x < 960 && drones[i].position.y > 470 && drones[i].position.y < 855) {
+            drones[i].move.x *= -1;
+        } else if(drones[i].position.x > 1040 && drones[i].position.x < 1045 && drones[i].position.y > 470 && drones[i].position.y < 855) {
+            drones[i].move.x *= -1;
+        }
+        
+        if (drones[i].position.x > 955 && drones[i].position.x < 1045 && drones[i].position.y > 475 && drones[i].position.y < 480) {
+            drones[i].move.y *= -1;
+        } else if (drones[i].position.x > 955 && drones[i].position.x < 1045 && drones[i].position.y > 845 && drones[i].position.y < 850) {
+            drones[i].move.y *= -1;
+        }
         
             //Drone Collision with runling
-            if (dist(runling.position.x, runling.position.y, drones[i].position.x, drones[i].position.y) < drones[i].r - 5 && godMode == -1 && invincible == -1) {
+            if (dist(runling.position.x, runling.position.y, drones[i].position.x, drones[i].position.y) < drones[i].r - drones[i].r/3 && godMode == -1 && invincible == -1) {
                 runling.position.x = 10;
                 runling.position.y = 10;
                 runlingMove = false;

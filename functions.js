@@ -74,46 +74,226 @@ function safeZones() {
     //safe zone 19
     rect(950, 850, 94, 93);
 
-    
-    
+
+
     if (runling.position.x > 0 && runling.position.x < 100 && runling.position.y > 0 && runling.position.y < 100) {
         godMode = 1;
     } else if (runling.position.x > 1377 && runling.position.x < 1500 && runling.position.y > 0 && runling.position.y < 96) {
         godMode = 1;
+        if (tiles[0]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[0] = false;
+        }
     } else if (runling.position.x > 1377 && runling.position.x < 1500 && runling.position.y > 1200 && runling.position.y < 1300) {
         godMode = 1;
+        if (tiles[1]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[1] = false;
+        }
     } else if (runling.position.x > 0 && runling.position.x < 100 && runling.position.y > 1200 && runling.position.y < 1300) {
         godMode = 1;
+        if (tiles[2]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[2] = false;
+        }
     } else if (runling.position.x > 0 && runling.position.x < 100 && runling.position.y > 105 && runling.position.y < 200) {
         godMode = 1;
+        if (tiles[3]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[3] = false;
+        }
     } else if (runling.position.x > 1250 && runling.position.x < 1370 && runling.position.y > 105 && runling.position.y < 200) {
         godMode = 1;
+        if (tiles[4]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[4] = false;
+        }
     } else if (runling.position.x > 1250 && runling.position.x < 1370 && runling.position.y > 1100 && runling.position.y < 1200) {
         godMode = 1;
+        if (tiles[5]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[5] = false;
+        }
     } else if (runling.position.x > 105 && runling.position.x < 200 && runling.position.y > 1100 && runling.position.y < 1200) {
         godMode = 1;
+        if (tiles[6]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[6] = false;
+        }
     } else if (runling.position.x > 105 && runling.position.x < 200 && runling.position.y > 205 && runling.position.y < 300) {
         godMode = 1;
+        if (tiles[7]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[7] = false;
+        }
     } else if (runling.position.x > 1150 && runling.position.x < 1245 && runling.position.y > 205 && runling.position.y < 300) {
         godMode = 1;
+        if (tiles[8]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[8] = false;
+        }
     } else if (runling.position.x > 1150 && runling.position.x < 1245 && runling.position.y > 1025 && runling.position.y < 1100) {
         godMode = 1;
+        if (tiles[9]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[9] = false;
+        }
     } else if (runling.position.x > 205 && runling.position.x < 300 && runling.position.y > 1025 && runling.position.y < 1100) {
         godMode = 1;
+        if (tiles[10]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[10] = false;
+        }
     } else if (runling.position.x > 205 && runling.position.x < 300 && runling.position.y > 305 && runling.position.y < 375) {
         godMode = 1;
+        if (tiles[11]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[11] = false;
+        }
     } else if (runling.position.x > 1050 && runling.position.x < 1150 && runling.position.y > 305 && runling.position.y < 375) {
         godMode = 1;
+        if (tiles[12]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[12] = false;
+        }
     } else if (runling.position.x > 1050 && runling.position.x < 1150 && runling.position.y > 950 && runling.position.y < 1025) {
         godMode = 1;
+        if (tiles[13]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[13] = false;
+        }
     } else if (runling.position.x > 305 && runling.position.x < 400 && runling.position.y > 950 && runling.position.y < 1020) {
         godMode = 1;
+        if (tiles[14]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[14] = false;
+        }
     } else if (runling.position.x > 305 && runling.position.x < 400 && runling.position.y > 380 && runling.position.y < 470) {
         godMode = 1;
+        if (tiles[15]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[15] = false;
+        }
     } else if (runling.position.x > 950 && runling.position.x < 1040 && runling.position.y > 380 && runling.position.y < 470) {
         godMode = 1;
+        if (tiles[16]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[16] = false;
+        }
     } else if (runling.position.x > 950 && runling.position.x < 1040 && runling.position.y > 850 && runling.position.y < 940) {
         godMode = 1;
+        if (tiles[17]) {
+            if (level == 2) {
+                runling.exp += 2;
+            } else if (level == 3) {
+                runling.exp += 3;
+            } else {
+                runling.exp += 1;
+            }
+            tiles[17] = false;
+        }
     } else {
         godMode = -1;
     }
@@ -121,4 +301,8 @@ function safeZones() {
 
 function cameraControl() {
     camera(runling.position.x - width / 2, runling.position.y - height / 2, 0);
+}
+
+function resetLevel() {
+    tiles.fill(true);
 }

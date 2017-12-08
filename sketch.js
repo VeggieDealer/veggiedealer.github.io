@@ -1,7 +1,11 @@
 let runlingDestination;
 let runling = {
     position: 0,
-    speed: 0.7
+    speed: 0.7,
+    level: 1,
+    exp: 0,
+    needExp: 0,
+    skillPoint: 4,
 }
 let runlingMove = false;
 let moveVector = false;
@@ -25,33 +29,61 @@ let godMode = -1;
 let invincible = -1;
 let level;
 let runSpeed = [0, 1.2, 1.35, 1.55, 1.75, 1.95, 2.15, 2.35, 2.55, 2.75, 2.95, 3.15, 3.35, 3.55, 3.75, 3.95, 4.15, 4.35];
-
-
+let tiles = []
+let rectangle = {
+    x: 0,
+    y: 0,
+}
+let speedPoints = 0;
 
 function setup() {
-    createCanvas(1000, 800);
+    createCanvas(1000, 1000);
     runling.position = createVector(10, 10);
     runlingDestination = createVector(0, 0);
     droneNumber = 0;
     baseDrone.move = p5.Vector.random2D(-1, 1);
     baseDrone.position = createVector(0, 0);
     level = 1;
+    
     //Calling localStorage
     runling.speed = parseFloat(localStorage.getItem("speed"));
+    runling.level = parseFloat(localStorage.getItem("level"));
+    runling.exp = parseFloat(localStorage.getItem("exp"));
+    runling.skillPoint = parseFloat(localStorage.getItem("sp"));
+    
+    //runling exp get thing
+    for (let i = 0; i < 19; i++) {
+        tiles.push(true);
+    }
+
 }
 
 // DRAW FUNCTION - Loops @ 60FPS by default
 function draw() {
+    rectangle.x = runling.position.x - width/2;
+    rectangle.y = runling.position.y + 350;
+    
 
+    runling.needExp = Math.pow(runling.level, 2);
+    //console.log(runling.level, runling.exp, runling.needExp);
     background(200, 200, 200);
     cameraControl();
     fill(200, 200, 200);
     safeZones();
 
     if (isNaN(runling.speed)) {
-        console.log("fixing...");
         runling.speed = runSpeed[1];
     }
+    if (isNaN(runling.level)) {
+        runling.level = 1;
+    }
+    if (isNaN(runling.exp)) {
+        runling.exp = 0;
+    }
+    if (isNaN(runling.skillPoint)) {
+        runling.skillPoint = 4;
+    }
+    
     if (runling.speed > 4.4) {
         runling.speed = 4.4;
     }
@@ -102,7 +134,8 @@ function draw() {
         //18
         sketchDrone(970, 1030, 490, 830, 0.7, 15);
     } else if (level == 2) {
-        for (let i = 0; i < drones.length; i ++) {
+        tiles
+        for (let i = 0; i < drones.length; i++) {
             drones.splice(i, 1);
         }
         //BLUE DRONES
@@ -146,16 +179,34 @@ function draw() {
         sketchDrone(420, 930, 400, 450, 0.7, 15);
         //18
         sketchDrone(970, 1030, 490, 830, 0.7, 15);
-        
+
         sketchBlueDrone();
     }
+    
 
-
-    droneNumber++;
     droneBounce();
 
+    droneNumber++;
+
+    
+    
+    rect(rectangle.x, rectangle.y, 1000, 150);
+    fill("white");
+    textSize(20)
+    text("Runling Level: " + runling.level, rectangle.x + 50, rectangle.y + 50);
+    text("Exp: " + runling.exp + "/" + runling.needExp, rectangle.x + 50, rectangle.y + 70);
+    text("Skill Points: " + runling.skillPoint, rectangle.x + 50, rectangle.y + 90);
+    fill("black");
+    stroke("white");
+    rect(rectangle.x + 580, rectangle.y + 20, 390, 50);
+    fill("white");
+    noStroke();
+    text("LEVEL UP SPEED (88 POINTS MAX):" + speedPoints, + rectangle.x + 600, rectangle.y + 50);
     //LOCAL STORAGE
     localStorage.setItem('speed', runling.speed);
+    localStorage.setItem("level", runling.level);
+    localStorage.setItem('exp', runling.exp);
+    localStorage.setItem('sp', runling.skillPoint);
 
 }
 
@@ -163,6 +214,14 @@ function mousePressed() {
     runlingMove = true;
     runlingDestination.x = mouseX - width / 2 + runling.position.x;
     runlingDestination.y = mouseY - height / 2 + runling.position.y;
+    
+    if (runling.skillPoint > 0) {
+        if (mouseX > rectangle.x + 580 && mouseX < rectangle.x + 580 + 390 && mouseY > rectangle.y + 20 && mouseY < rectangle.y + 20 + 50) {
+            runling.skillPoint--;
+            speedPoints++;
+        }
+    }
+    
 }
 
 function keyPressed() {

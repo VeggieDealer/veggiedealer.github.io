@@ -26,6 +26,18 @@ function drawCharacter() {
     }
 
 
+
+    if (runling.level < 75) {
+        if (runling.exp >= runling.needExp) {
+            runling.level++;
+            runling.skillPoint += 4;
+        }
+    } else if (runling.level >= 75) {
+        runling.exp = 0;
+    }
+
+
+
 }
 
 function boundaries() {
@@ -74,6 +86,7 @@ function boundaries() {
     } else if (runling.position.x > 495 && runling.position.x < 940 && runling.position.y > 482 && runling.position.y < 545) {
         lane = 21;
         level++;
+        resetLevel();
     }
 
 

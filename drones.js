@@ -1,5 +1,5 @@
 function sketchDrone(xMin, xMax, yMin, yMax, magSpeed, r) {
-    if (droneNumber < 7) {
+    if (droneNumber < 15) {
         drones.push(Object.assign({}, baseDrone));
         drones[drones.length - 1].position = createVector();
         drones[drones.length - 1].position.x = random(xMin, xMax);

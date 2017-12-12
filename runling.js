@@ -12,18 +12,18 @@ function runMove() {
 }
 
 function drawCharacter() {
-    stroke("orange")
+    stroke("green")
     strokeWeight(1);
-    fill("orange");
-    ellipse(runling.position.x, runling.position.y, 4);
+    fill("purple");
+    ellipse(runling.position.x, runling.position.y, 8);
+    
+    noFill();
+stroke(0, 0, 55);
+    ellipse(runling.position.x, runling.position.y, 100)
 
     // runling speeds
 
-    for (let i = 0; i < 20; i++) {
-        if (runling.speed < runSpeed[i] && lane == i) {
-            runling.speed += 0.2;
-        }
-    }
+    runling.speed = speedPoints * 0.05 + 1;
 
 
 
@@ -86,6 +86,7 @@ function boundaries() {
     } else if (runling.position.x > 495 && runling.position.x < 940 && runling.position.y > 482 && runling.position.y < 545) {
         lane = 21;
         level++;
+        runling.exp += 10;
         resetLevel();
     }
 

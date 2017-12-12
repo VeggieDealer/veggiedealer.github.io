@@ -5,17 +5,27 @@ let runling = {
     level: 1,
     exp: 0,
     needExp: 0,
-    skillPoint: 4,
+    skillPoint: 4
 }
 let runlingMove = false;
 let moveVector = false;
 let drones = [];
 let blueDrones = [];
-let baseDrone = {
-    position: 0,
-    r: 15,
-    move: 0,
+
+class baseDrone {
+    constructor(position, move, r) {
+        this.position = position;
+        this.move = move;
+        this.r = r;
+        this.freeze = false;
+    }
+
+    coolDown() {
+
+        setInterval(() => this.freeze = false, 5000);
+    }
 }
+
 class baseBlueDrone {
     constructor() {
         this.position = createVector(750, 650);
@@ -36,6 +46,7 @@ let rectangle = {
 }
 let speedPoints = 0;
 let cheat = 0;
+let ability = [];
 
 function setup() {
     createCanvas(1000, 1000);
@@ -86,8 +97,8 @@ function draw() {
         runling.skillPoint = 4;
     }
 
-    if (runling.speed > 4.4) {
-        runling.speed = 4.4;
+    if (runling.speed > 8.8) {
+        runling.speed = 8.8;
     }
     if (isNaN(speedPoints)) {
         speedPoints = 0;
@@ -139,7 +150,6 @@ function draw() {
         //18
         sketchDrone(970, 1030, 490, 830, 0.7, 15);
     } else if (level == 2) {
-        tiles
         for (let i = 0; i < drones.length; i++) {
             drones.splice(i, 1);
         }
@@ -187,11 +197,11 @@ function draw() {
 
         sketchBlueDrone();
     }
-    
+
     droneBounce();
 
     droneNumber++;
-    
+
     fill("black");
     rect(rectangle.x, rectangle.y, 1000, 150);
     fill("white");
@@ -204,7 +214,7 @@ function draw() {
     rect(rectangle.x + 580, rectangle.y + 20, 390, 50);
     fill("white");
     noStroke();
-    text("LEVEL UP SPEED (88 POINTS MAX):" + speedPoints, rectangle.x + 590, rectangle.y + 50);
+    text("LEVEL UP SPEED (68 POINTS MAX):" + speedPoints, rectangle.x + 590, rectangle.y + 50);
     //LOCAL STORAGE
     localStorage.setItem('speed', runling.speed);
     localStorage.setItem("level", runling.level);
@@ -221,8 +231,10 @@ function mousePressed() {
     }
     if (runling.skillPoint > 0) {
         if (mouseX > 580 && mouseX < 970 && mouseY > 870 && mouseY < 920) {
-            runling.skillPoint--;
-            speedPoints++;
+            if (speedPoints < 68) {
+                runling.skillPoint--;
+                speedPoints++;
+            }
         }
     }
 
@@ -231,6 +243,15 @@ function mousePressed() {
 function keyPressed() {
     if (keyCode == 83) {
         runlingMove = false;
+    }
+
+    if (keyCode == 68) {
+        for (let i = 0; i < drones.length; i++) {
+            if (dist(runling.position.x, runling.position.y, drones[i].position.x, drones[i].position.y) < 50 && !drones[i].freeze) {
+                drones[i].freeze = true;
+                drones[i].coolDown();
+            }
+        }
     }
 
     if (keyCode == 53 && cheat == 0) {
@@ -251,6 +272,6 @@ function keyPressed() {
     } else {
         cheat = 0;
     }
-    
-        
+
+
 }

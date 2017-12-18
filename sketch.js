@@ -21,16 +21,29 @@ class baseDrone {
     }
 
     coolDown() {
-
-        setInterval(() => this.freeze = false, 5000);
+        let that = this;
+        setTimeout(function () {
+            that.freeze = false
+        }, 5000);
     }
+
 }
+
+
 
 class baseBlueDrone {
     constructor() {
         this.position = createVector(750, 650);
         this.r = 15;
         this.move = p5.Vector.random2D();
+        this.freeze = false;
+    }
+
+    coolDown() {
+        let that = this;
+        setTimeout(function () {
+            that.freeze = false
+        }, 5000);
     }
 }
 let lane = 0;
@@ -47,6 +60,35 @@ let rectangle = {
 let speedPoints = 0;
 let cheat = 0;
 let ability = [];
+let freezeImg;
+let freeze = {
+    img: undefined,
+    unlock: false,
+    level: 0,
+    CD: 0,
+}
+let speedBoost = {
+    unlock: false,
+    img: undefined,
+    actualLevel: 0,
+    level: [1, 2, 3, 4, 5],
+    CD: 0,
+    activate: false,
+    time: 0,
+    stopWorking: () => {
+        setTimeout(function () {
+            speedBoost.activate = false;
+            runling.speed = runling.speed / (1 + (speedBoost.actualLevel * 0.2));
+        }, 5000)
+    },
+}
+
+
+
+function preload() {
+    freeze.img = loadImage('assets/timeFreeze.jpg');
+    speedBoost.img = loadImage('assets/speed.png');
+}
 
 function setup() {
     createCanvas(1000, 1000);
@@ -63,6 +105,8 @@ function setup() {
     runling.exp = parseFloat(localStorage.getItem("exp"));
     runling.skillPoint = parseFloat(localStorage.getItem("sp"));
     speedPoints = parseFloat(localStorage.getItem("speedPoint"));
+    freeze.level = parseFloat(localStorage.getItem("freezeLevel"));
+    freeze.unlock = parseFloat(localStorage.getItem("freezeUnlock"));
 
     //runling exp get thing
     for (let i = 0; i < 19; i++) {
@@ -76,6 +120,7 @@ function draw() {
     rectangle.x = runling.position.x - width / 2;
     rectangle.y = runling.position.y + 350;
 
+    console.log(runling.speed);
 
     runling.needExp = Math.pow(runling.level, 2);
     //console.log(runling.level, runling.exp, runling.needExp);
@@ -103,6 +148,19 @@ function draw() {
     if (isNaN(speedPoints)) {
         speedPoints = 0;
     }
+    if (isNaN(freeze.unlock)) {
+        freeze.unlock = false;;
+    }
+    if (isNaN(freeze.level)) {
+        freeze.level = 0;
+    }
+
+    if (freeze.level > 0) {
+        freeze.unlock = true;
+    }
+
+
+
     fill("white");
 
 
@@ -198,6 +256,27 @@ function draw() {
         sketchBlueDrone();
     }
 
+    speedBoost.time++;
+    
+    if (speedBoost.time % 60 == 0) {
+        speedBoost.CD--;
+    }
+    
+    if (speedBoost.CD < 0) {
+        speedBoost.CD = 0;
+    }
+    
+    if (frameCount % 60 == 0) {
+        freeze.CD -= 1;
+    }
+
+    if (freeze.CD < 0) {
+        freeze.CD = 0;
+    }
+
+
+
+
     droneBounce();
 
     droneNumber++;
@@ -209,18 +288,42 @@ function draw() {
     text("Runling Level: " + runling.level, rectangle.x + 50, rectangle.y + 50);
     text("Exp: " + runling.exp + "/" + runling.needExp, rectangle.x + 50, rectangle.y + 70);
     text("Skill Points: " + runling.skillPoint, rectangle.x + 50, rectangle.y + 90);
+
     fill("black");
     stroke("white");
+
     rect(rectangle.x + 580, rectangle.y + 20, 390, 50);
     fill("white");
+
     noStroke();
     text("LEVEL UP SPEED (68 POINTS MAX):" + speedPoints, rectangle.x + 590, rectangle.y + 50);
+
+
+    image(freeze.img, rectangle.x + 230, rectangle.y + 20);
+    textSize(15)
+    if (!freeze.unlock) {
+        text("TIME FREEZE: YET TO UNLOCK", rectangle.x + 160, rectangle.y + 115);
+    } else {
+        text("TIME FREEZE: " + freeze.CD, rectangle.x + 210, rectangle.y + 115);
+        text("Press the D key ", rectangle.x + 210, rectangle.y + 130);
+    }
+
+    image(speedBoost.img, rectangle.x + 370, rectangle.y + 20);
+    if (!speedBoost.unlock) {
+        text("SPEED BOOST: YET TO UNLOCK", rectangle.x + 300, rectangle.y + 130);
+    } else {
+        text("SPEED BOOST: " + speedBoost.CD, rectangle.x + 350, rectangle.y + 115);
+        text("Press the F key", rectangle.x + 350, rectangle.y + 130);
+    }
+
     //LOCAL STORAGE
     localStorage.setItem('speed', runling.speed);
     localStorage.setItem("level", runling.level);
     localStorage.setItem('exp', runling.exp);
     localStorage.setItem('sp', runling.skillPoint);
     localStorage.setItem('speedPoint', speedPoints);
+    localStorage.setItem('freezeUnlock', freeze.unlock);
+    localStorage.setItem('freezeLevel', freeze.level);
 }
 
 function mousePressed() {
@@ -238,6 +341,27 @@ function mousePressed() {
         }
     }
 
+    if (mouseX > 228 && mouseX < 328 && mouseY > 870 && mouseY < 940) {
+        if (runling.skillPoint >= 4) {
+            if (freeze.level < 12) {
+                freeze.unlock = true;
+                freeze.level++;
+                runling.skillPoint -= 4;
+            }
+        }
+    }
+
+    if (mouseX > 370 && mouseX < 450 && mouseY < 940 && mouseY > 865) {
+        if (runling.skillPoint >= 4) {
+            console.log("j");
+            if (speedBoost.actualLevel < 5) {
+                speedBoost.unlock = true;;
+                speedBoost.actualLevel++;
+                runling.skillPoint -= 4;
+            }
+        }
+    }
+
 }
 
 function keyPressed() {
@@ -245,33 +369,61 @@ function keyPressed() {
         runlingMove = false;
     }
 
-    if (keyCode == 68) {
-        for (let i = 0; i < drones.length; i++) {
-            if (dist(runling.position.x, runling.position.y, drones[i].position.x, drones[i].position.y) < 50 && !drones[i].freeze) {
-                drones[i].freeze = true;
-                drones[i].coolDown();
+
+    if (freeze.unlock && freeze.CD == 0) {
+        if (keyCode == 68) {
+            freeze.CD = Math.ceil(17 - freeze.level);
+            for (let i = 0; i < drones.length; i++) {
+                if (dist(runling.position.x, runling.position.y, drones[i].position.x, drones[i].position.y) < 80 && !drones[i].freeze) {
+                    drones[i].freeze = true;
+                    drones[i].coolDown();
+                }
             }
+            for (let i = 0; i < blueDrones.length; i++) {
+                if (dist(runling.position.x, runling.position.y, blueDrones[i].position.x, blueDrones[i].position.y) < 80 && !blueDrones[i].freeze) {
+                    blueDrones[i].freeze = true;
+                    blueDrones[i].coolDown();
+                }
+            }
+            frameCount = 0;
         }
-    }
 
-    if (keyCode == 53 && cheat == 0) {
-        cheat++;
-    } else if (keyCode == 72 && cheat == 1) {
-        cheat++;
-    } else if (keyCode == 77 && cheat == 2) {
-        cheat++;
-    } else if (keyCode == 79 && cheat == 3) {
-        cheat++;
-    } else if (keyCode == 80 && cheat == 4) {
-        cheat = 0;
-        if (invincible == -1) {
-            invincible = 1;
+        if (keyCode == 53 && cheat == 0) {
+            cheat++;
+        } else if (keyCode == 72 && cheat == 1) {
+            cheat++;
+        } else if (keyCode == 77 && cheat == 2) {
+            cheat++;
+        } else if (keyCode == 79 && cheat == 3) {
+            cheat++;
+        } else if (keyCode == 80 && cheat == 4) {
+            cheat = 0;
+            if (invincible == -1) {
+                invincible = 1;
+            } else {
+                invincible = -1;
+            }
         } else {
-            invincible = -1;
+            cheat = 0;
         }
-    } else {
-        cheat = 0;
+
+
     }
 
+
+    if (speedBoost.unlock && speedBoost.CD == 0) {
+        if (keyCode == 70) {
+            speedBoost.time = 0;
+            speedBoost.CD = 10;
+            speedBoost.activate = true;
+            for (let i = 0; i < speedBoost.level.length; i++) {
+                if (speedBoost.actualLevel == speedBoost.level[i]) {
+                    runling.speed = runling.speed * (1 + (speedBoost.actualLevel * 0.2));
+                }
+            }
+
+            speedBoost.stopWorking();
+        }
+    }
 
 }

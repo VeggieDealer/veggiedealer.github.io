@@ -19,11 +19,12 @@ function drawCharacter() {
     
     noFill();
 stroke(0, 0, 55);
-    ellipse(runling.position.x, runling.position.y, 100)
+    ellipse(runling.position.x, runling.position.y, 150)
 
     // runling speeds
-
+    if (!speedBoost.activate) {
     runling.speed = speedPoints * 0.05 + 1;
+    }
 
 
 
@@ -53,9 +54,9 @@ function boundaries() {
         lane = 4;
     } else if (runling.position.x > 0 && runling.position.x < 1245 && runling.position.y > 110 && runling.position.y < 200) {
         lane = 5;
-    } else if (runling.position.x > 1250 && runling.position.x < 1375 && runling.position.y > 110 && runling.position.y < 1100) {
+    } else if (runling.position.x > 1250 && runling.position.x < 1370 && runling.position.y > 110 && runling.position.y < 1100) {
         lane = 6;
-    } else if (runling.position.x > 200 && runling.position.x < 1375 && runling.position.y < 1190 && runling.position.y > 1105) {
+    } else if (runling.position.x > 200 && runling.position.x < 1370 && runling.position.y < 1190 && runling.position.y > 1105) {
         lane = 7;
     } else if (runling.position.x > 100 && runling.position.x < 200 && runling.position.y > 310 && runling.position.y < 1190) {
         lane = 8;
@@ -96,7 +97,7 @@ function boundaries() {
         runling.position.x = constrain(runling.position.x, 7, 1500 - 3);
         runling.position.y = constrain(runling.position.y, 7, 93);
     } else if (lane == 2) {
-        runling.position.x = constrain(runling.position.x, 1380, 1500 - 6);
+        runling.position.x = constrain(runling.position.x, 1385, 1500 - 6);
         runling.position.y = constrain(runling.position.y, 7, 1300 - 6);
     } else if (lane == 3) {
         runling.position.x = constrain(runling.position.x, 6, 1500 - 6);

@@ -19,11 +19,16 @@ function sketchBlueDrone() {
         blueDrones[blueDrones.length - 1].r = 15
     }
 
+    
 
     for (j = 0; j < blueDrones.length; j++) {
+    if (blueDrones[j].freeze) {
+        fill(70,130,180);
+    } else {
         fill("blue");
-        ellipse(blueDrones[j].position.x, blueDrones[j].position.y, blueDrones[j].r);
         blueDrones[j].position.add(blueDrones[j].move);
+    }
+        ellipse(blueDrones[j].position.x, blueDrones[j].position.y, blueDrones[j].r);
 
         if (blueDrones[j].position.x < 0 || blueDrones[j].position.x > 1500 || blueDrones[j].position.y < 0 || blueDrones[j].position.y > 1300) {
             blueDrones.splice(j, 1);
@@ -44,13 +49,13 @@ function droneBounce() {
     // Creating the drones
     for (i = 0; i < drones.length; i++) {
         if (drones[i].freeze) {
-            fill("blue");
+            fill(70,130,180);
 
         } else {
             fill("black")
-            ellipse(drones[i].position.x, drones[i].position.y, drones[i].r);
             drones[i].position.add(drones[i].move);
         }
+            ellipse(drones[i].position.x, drones[i].position.y, drones[i].r);
 
 
         //lane one drones rebounce

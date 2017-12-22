@@ -107,6 +107,9 @@ function setup() {
     speedPoints = parseFloat(localStorage.getItem("speedPoint"));
     freeze.level = parseFloat(localStorage.getItem("freezeLevel"));
     freeze.unlock = parseFloat(localStorage.getItem("freezeUnlock"));
+    speedBoost.unlock = parseFloat(localStorage.getItem("speedUnlock"));
+    speedBoost.actualLevel = parseFloat(localStorage.getItem("speedLevel"));
+
 
     //runling exp get thing
     for (let i = 0; i < 19; i++) {
@@ -119,8 +122,6 @@ function setup() {
 function draw() {
     rectangle.x = runling.position.x - width / 2;
     rectangle.y = runling.position.y + 350;
-
-    console.log(runling.speed);
 
     runling.needExp = Math.pow(runling.level, 2);
     //console.log(runling.level, runling.exp, runling.needExp);
@@ -158,6 +159,16 @@ function draw() {
     if (freeze.level > 0) {
         freeze.unlock = true;
     }
+
+    if (isNaN(speedBoost.actualLevel)) {
+        speedBoost.actualLevel = 0;
+    }
+
+    if (isNaN(speedBoost.unlock)) {
+        speedBoost.unlock = false;
+    }
+
+
 
 
 
@@ -257,15 +268,15 @@ function draw() {
     }
 
     speedBoost.time++;
-    
+
     if (speedBoost.time % 60 == 0) {
         speedBoost.CD--;
     }
-    
+
     if (speedBoost.CD < 0) {
         speedBoost.CD = 0;
     }
-    
+
     if (frameCount % 60 == 0) {
         freeze.CD -= 1;
     }
@@ -324,6 +335,8 @@ function draw() {
     localStorage.setItem('speedPoint', speedPoints);
     localStorage.setItem('freezeUnlock', freeze.unlock);
     localStorage.setItem('freezeLevel', freeze.level);
+    localStorage.setItem('speedUnlock', speedBoost.unlock);
+    localStorage.setItem('speedLevel', speedBoost.actualLevel);
 }
 
 function mousePressed() {
@@ -354,6 +367,9 @@ function mousePressed() {
     if (mouseX > 370 && mouseX < 450 && mouseY < 940 && mouseY > 865) {
         if (runling.skillPoint >= 4) {
             console.log("j");
+            if (!speedBoost.unlock) {
+                speedBoost.unlock = true;
+            }
             if (speedBoost.actualLevel < 5) {
                 speedBoost.unlock = true;;
                 speedBoost.actualLevel++;

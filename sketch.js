@@ -166,6 +166,8 @@ function draw() {
 
     if (isNaN(speedBoost.unlock)) {
         speedBoost.unlock = false;
+    } else if (!isNaN(speedBoost.unlock) && speedBoost.actualLevel > 0) {
+        speedBoost.unlock = true;
     }
 
 

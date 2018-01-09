@@ -1,14 +1,6 @@
 function sketchDrone(xMin, xMax, yMin, yMax, magSpeed, r) {
     if (droneNumber < 8) {
-        //        drones.push(Object.assign({}, baseDrone));
-        //        drones[drones.length - 1].position = createVector();
-        //        drones[drones.length - 1].position.x = random(xMin, xMax);
-        //        drones[drones.length - 1].position.y = random(yMin, yMax);
-        //        drones[drones.length - 1].move = p5.Vector.random2D();
-        //        drones[drones.length - 1].move.setMag(magSpeed);
-        //        drones[drones.length - 1].r = r;
         drones.push(new baseDrone(createVector(random(xMin, xMax), random(yMin, yMax)), p5.Vector.random2D().setMag(magSpeed), r));
-
     }
 }
 
@@ -19,15 +11,15 @@ function sketchBlueDrone() {
         blueDrones[blueDrones.length - 1].r = 15
     }
 
-    
+
 
     for (j = 0; j < blueDrones.length; j++) {
-    if (blueDrones[j].freeze) {
-        fill(70,130,180);
-    } else {
-        fill("blue");
-        blueDrones[j].position.add(blueDrones[j].move);
-    }
+        if (blueDrones[j].freeze) {
+            fill(70, 130, 180);
+        } else {
+            fill("blue");
+            blueDrones[j].position.add(blueDrones[j].move);
+        }
         ellipse(blueDrones[j].position.x, blueDrones[j].position.y, blueDrones[j].r);
 
         if (blueDrones[j].position.x < 0 || blueDrones[j].position.x > 1500 || blueDrones[j].position.y < 0 || blueDrones[j].position.y > 1300) {
@@ -49,13 +41,13 @@ function droneBounce() {
     // Creating the drones
     for (i = 0; i < drones.length; i++) {
         if (drones[i].freeze) {
-            fill(70,130,180);
+            fill(70, 130, 180);
 
         } else {
             fill("black")
             drones[i].position.add(drones[i].move);
         }
-            ellipse(drones[i].position.x, drones[i].position.y, drones[i].r);
+        ellipse(drones[i].position.x, drones[i].position.y, drones[i].r);
 
 
         //lane one drones rebounce

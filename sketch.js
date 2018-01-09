@@ -59,7 +59,6 @@ let rectangle = {
 }
 let speedPoints = 0;
 let cheat = 0;
-let ability = [];
 let freezeImg;
 let freeze = {
     img: undefined,
@@ -100,15 +99,7 @@ function setup() {
     level = 1;
 
     //Calling localStorage
-    runling.speed = parseFloat(localStorage.getItem("speed"));
-    runling.level = parseFloat(localStorage.getItem("level"));
-    runling.exp = parseFloat(localStorage.getItem("exp"));
-    runling.skillPoint = parseFloat(localStorage.getItem("sp"));
-    speedPoints = parseFloat(localStorage.getItem("speedPoint"));
-    freeze.level = parseFloat(localStorage.getItem("freezeLevel"));
-    freeze.unlock = parseFloat(localStorage.getItem("freezeUnlock"));
-    speedBoost.unlock = parseFloat(localStorage.getItem("speedUnlock"));
-    speedBoost.actualLevel = parseFloat(localStorage.getItem("speedLevel"));
+    localSetup();
 
 
     //runling exp get thing
@@ -130,49 +121,7 @@ function draw() {
     fill(200, 200, 200);
     safeZones();
 
-    if (isNaN(runling.speed)) {
-        runling.speed = runSpeed[1];
-    }
-    if (isNaN(runling.level)) {
-        runling.level = 1;
-    }
-    if (isNaN(runling.exp)) {
-        runling.exp = 0;
-    }
-    if (isNaN(runling.skillPoint)) {
-        runling.skillPoint = 4;
-    }
-
-    if (runling.speed > 8.8) {
-        runling.speed = 8.8;
-    }
-    if (isNaN(speedPoints)) {
-        speedPoints = 0;
-    }
-    if (isNaN(freeze.unlock)) {
-        freeze.unlock = false;;
-    }
-    if (isNaN(freeze.level)) {
-        freeze.level = 0;
-    }
-
-    if (freeze.level > 0) {
-        freeze.unlock = true;
-    }
-
-    if (isNaN(speedBoost.actualLevel)) {
-        speedBoost.actualLevel = 0;
-    }
-
-    if (isNaN(speedBoost.unlock)) {
-        speedBoost.unlock = false;
-    } else if (!isNaN(speedBoost.unlock) && speedBoost.actualLevel > 0) {
-        speedBoost.unlock = true;
-    }
-
-
-
-
+    local();
 
     fill("white");
 
@@ -182,92 +131,7 @@ function draw() {
     drawCharacter();
     stroke(0);
 
-    if (level == 1) {
-        // Assigning the drones random spots within the lane and giving them random speeds
-        //    lane 1 drone 
-        sketchDrone(115, 1300, 10, 88, 0.7, 15);
-        //lane 2 drone 
-        sketchDrone(1400, 1490, 110, 1100, 0.7, 15);
-        //drones in lane 3
-        sketchDrone(160, 1300, 1220, 1300 - 11, 0.7, 15);
-        //drones in lane 4
-        sketchDrone(10, 85, 250, 1150, 0.7, 15);
-        //drones in lane 5
-        sketchDrone(110, 1100, 115, 185, 0.7, 15);
-        //drones in lane 6
-        sketchDrone(1280, 1360, 210, 1080, 0.7, 15);
-        //drones in lane 7
-        sketchDrone(225, 1180, 1110, 1180, 0.7, 15);
-        //drones in lane 8
-        sketchDrone(110, 180, 320, 1070, 0.7, 15);
-        //drone in lane 9
-        sketchDrone(300, 1100, 240, 260, 0.7, 15);
-        //drones in lane 10
-        sketchDrone(1185, 1225, 350, 950, 0.7, 15);
-        //drones in lane 11
-        sketchDrone(340, 1100, 1050, 1075, 0.7, 15);
-        //drones in lane 12
-        sketchDrone(220, 260, 400, 1000, 0.7, 15);
-        //drones in lane 13
-        sketchDrone(320, 1030, 315, 360, 0.7, 15);
-        //drones in lane 14
-        sketchDrone(1060, 1140, 380, 940, 0.7, 15);
-        //drone 15
-        sketchDrone(420, 1020, 980, 1000, 0.7, 15);
-        //16
-        sketchDrone(320, 375, 500, 900, 0.7, 15);
-        //17
-        sketchDrone(420, 930, 400, 450, 0.7, 15);
-        //18
-        sketchDrone(970, 1030, 490, 830, 0.7, 15);
-    } else if (level == 2) {
-        for (let i = 0; i < drones.length; i++) {
-            drones.splice(i, 1);
-        }
-        //BLUE DRONES
-
-        sketchBlueDrone();
-        droneNumber = 0;
-    } else if (level == 3) {
-        //lane 1 drone 
-        sketchDrone(115, 1300, 10, 88, 0.7, 15);
-        //lane 2 drone 
-        sketchDrone(1400, 1490, 110, 1100, 0.7, 15);
-        //drones in lane 3
-        sketchDrone(160, 1300, 1220, 1300 - 11, 0.7, 15);
-        //drones in lane 4
-        sketchDrone(10, 85, 250, 1150, 0.7, 15);
-        //drones in lane 5
-        sketchDrone(110, 1100, 115, 185, 0.7, 15);
-        //drones in lane 6
-        sketchDrone(1280, 1360, 210, 1080, 0.7, 15);
-        //drones in lane 7
-        sketchDrone(225, 1180, 1110, 1180, 0.7, 15);
-        //drones in lane 8
-        sketchDrone(110, 180, 320, 1070, 0.7, 15);
-        //drone in lane 9
-        sketchDrone(300, 1100, 240, 260, 0.7, 15);
-        //drones in lane 10
-        sketchDrone(1185, 1225, 350, 950, 0.7, 15);
-        //drones in lane 11
-        sketchDrone(340, 1100, 1050, 1075, 0.7, 15);
-        //drones in lane 12
-        sketchDrone(220, 260, 400, 1000, 0.7, 15);
-        //drones in lane 13
-        sketchDrone(320, 1030, 315, 360, 0.7, 15);
-        //drones in lane 14
-        sketchDrone(1060, 1140, 380, 940, 0.7, 15);
-        //drone 15
-        sketchDrone(420, 1020, 980, 1000, 0.7, 15);
-        //16
-        sketchDrone(320, 375, 500, 900, 0.7, 15);
-        //17
-        sketchDrone(420, 930, 400, 450, 0.7, 15);
-        //18
-        sketchDrone(970, 1030, 490, 830, 0.7, 15);
-
-        sketchBlueDrone();
-    }
+    levelSetup();
 
     speedBoost.time++;
 
@@ -286,9 +150,6 @@ function draw() {
     if (freeze.CD < 0) {
         freeze.CD = 0;
     }
-
-
-
 
     droneBounce();
 
@@ -329,16 +190,7 @@ function draw() {
         text("Press the F key", rectangle.x + 350, rectangle.y + 130);
     }
 
-    //LOCAL STORAGE
-    localStorage.setItem('speed', runling.speed);
-    localStorage.setItem("level", runling.level);
-    localStorage.setItem('exp', runling.exp);
-    localStorage.setItem('sp', runling.skillPoint);
-    localStorage.setItem('speedPoint', speedPoints);
-    localStorage.setItem('freezeUnlock', freeze.unlock);
-    localStorage.setItem('freezeLevel', freeze.level);
-    localStorage.setItem('speedUnlock', speedBoost.unlock);
-    localStorage.setItem('speedLevel', speedBoost.actualLevel);
+
 }
 
 function mousePressed() {
@@ -350,8 +202,15 @@ function mousePressed() {
     if (runling.skillPoint > 0) {
         if (mouseX > 580 && mouseX < 970 && mouseY > 870 && mouseY < 920) {
             if (speedPoints < 68) {
-                runling.skillPoint--;
-                speedPoints++;
+                if (speedPoints > 19 && runling.skillPoint > 1) {
+                    runling.skillPoint -= 2;
+                    speedPoints++;
+                } else {
+                    runling.skillPoint--;
+                    speedPoints++;
+
+                }
+
             }
         }
     }
@@ -368,7 +227,6 @@ function mousePressed() {
 
     if (mouseX > 370 && mouseX < 450 && mouseY < 940 && mouseY > 865) {
         if (runling.skillPoint >= 4) {
-            console.log("j");
             if (!speedBoost.unlock) {
                 speedBoost.unlock = true;
             }

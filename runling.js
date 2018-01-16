@@ -16,14 +16,21 @@ function drawCharacter() {
     strokeWeight(1);
     fill("purple");
     ellipse(runling.position.x, runling.position.y, 8);
-    
+
     noFill();
-stroke(0, 0, 55);
-    ellipse(runling.position.x, runling.position.y, 150)
+    stroke(0, 0, 55);
+
+    for (let i = 1; i < 100; i++) {
+        if (freeze.level == i) {
+            freeze.radius = i * 100;
+            freeze.radius = Math.pow(freeze.radius, .8)
+        }
+    }
+    ellipse(runling.position.x, runling.position.y, freeze.radius);
 
     // runling speeds
     if (!speedBoost.activate) {
-    runling.speed = speedPoints * 0.05 + 1;
+        runling.speed = speedPoints * 0.05 + 1;
     }
 
 

@@ -240,6 +240,10 @@ function local() {
         speedBoost.unlock = true;
     }
 
+    if (isNaN(CDR.points)) {
+        CDR.points = 0;
+    }
+
 
     //LOCAL SAVE
     localStorage.setItem('speed', runling.speed);
@@ -251,6 +255,7 @@ function local() {
     localStorage.setItem('freezeLevel', freeze.level);
     localStorage.setItem('speedUnlock', speedBoost.unlock);
     localStorage.setItem('speedLevel', speedBoost.actualLevel);
+    localStorage.setItem('CDR', CDR.points);
 
 
 }
@@ -265,6 +270,7 @@ function localSetup() {
     freeze.unlock = parseFloat(localStorage.getItem("freezeUnlock"));
     speedBoost.unlock = parseFloat(localStorage.getItem("speedUnlock"));
     speedBoost.actualLevel = parseFloat(localStorage.getItem("speedLevel"));
+    CDR.points = parseFloat(localStorage.getItem("CDR"));
 
 }
 
@@ -355,4 +361,45 @@ function levelSetup() {
 
         sketchBlueDrone();
     }
+}
+
+function HUD() {
+    fill("black");
+    rect(rectangle.x, rectangle.y, 1000, 150);
+    fill("white");
+    textSize(20)
+    text("Runling Level: " + runling.level, rectangle.x + 50, rectangle.y + 50);
+    text("Exp: " + runling.exp + "/" + runling.needExp, rectangle.x + 50, rectangle.y + 70);
+    text("Skill Points: " + runling.skillPoint, rectangle.x + 50, rectangle.y + 90);
+
+    fill("black");
+    stroke("white");
+
+    rect(rectangle.x + 580, rectangle.y + 20, 390, 50);
+    rect(rectangle.x + 580, rectangle.y + 80, 390, 50);
+    fill("white");
+
+    noStroke();
+    text("LEVEL UP SPEED (68 POINTS MAX):" + speedPoints, rectangle.x + 590, rectangle.y + 50);
+
+    text("LEVEL UP CDR (24 POINTS MAX):" + CDR.points, rectangle.x + 590, rectangle.y + 110);
+
+    image(freeze.img, rectangle.x + 230, rectangle.y + 20);
+    textSize(15)
+    if (!freeze.unlock) {
+        text("TIME FREEZE: YET TO UNLOCK", rectangle.x + 160, rectangle.y + 115);
+    } else {
+        text("TIME FREEZE: " + freeze.CD, rectangle.x + 210, rectangle.y + 115);
+        text("Press the D key ", rectangle.x + 210, rectangle.y + 130);
+    }
+
+    image(speedBoost.img, rectangle.x + 370, rectangle.y + 20);
+    if (!speedBoost.unlock) {
+        text("SPEED BOOST: YET TO UNLOCK", rectangle.x + 300, rectangle.y + 130);
+    } else {
+        text("SPEED BOOST: " + speedBoost.CD, rectangle.x + 350, rectangle.y + 115);
+        text("Press the F key", rectangle.x + 350, rectangle.y + 130);
+    }
+
+
 }

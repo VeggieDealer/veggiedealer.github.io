@@ -384,7 +384,7 @@ function HUD() {
 
     text("LEVEL UP CDR (24 POINTS MAX):" + CDR.points, rectangle.x + 590, rectangle.y + 110);
 
-    image(freeze.img, rectangle.x + 230, rectangle.y + 20);
+//    image(freeze.img, rectangle.x + 230, rectangle.y + 20);
     textSize(15)
     if (!freeze.unlock) {
         text("TIME FREEZE: YET TO UNLOCK", rectangle.x + 160, rectangle.y + 115);
@@ -393,7 +393,7 @@ function HUD() {
         text("Press the D key ", rectangle.x + 210, rectangle.y + 130);
     }
 
-    image(speedBoost.img, rectangle.x + 370, rectangle.y + 20);
+//    image(speedBoost.img, rectangle.x + 370, rectangle.y + 20);
     if (!speedBoost.unlock) {
         text("SPEED BOOST: YET TO UNLOCK", rectangle.x + 300, rectangle.y + 130);
     } else {
